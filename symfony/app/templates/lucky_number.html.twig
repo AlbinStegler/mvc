@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Magic number{% endblock %}
+
+{% block main %}
+    <h1>Magic number</h1>
+    <p>Welcome to my awesome magical homepage.</p>
+    <p>This is the current magic number: {{ number }}</p>
+    {% if (number > 50) %}
+    <img src="{{asset('img/luckycat.png')}}">
+    {% else %}
+    <img src="{{asset('img/unlucky.png')}}">
+    {% endif %}
+
+{% endblock %}
