@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class LuckyControllerJson extends AbstractController
+class QuoteJson extends AbstractController
 {
     #[Route("/api/quote")]
     public function jsonNumber(): Response
