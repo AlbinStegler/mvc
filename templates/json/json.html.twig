@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block main %}
+    <h1>Json</h1>
+    <a href='{{path("quote")}}'><h2>Visa quotes</h2></a>
+
+    <form method="post" action="">
+    <p>
+        <h2>Visa blandad kortlek</h2>
+        <input type="submit" name="shuffle" value="Shuffle"
+            onClick="this.form.action='{{ path('shuffle-Json') }}';"
+        >
+    </p>
+    <p>
+        <h2>Dra ett kort</h2>
+        <input type="submit" name="draw" value="Dra 1"
+            onClick="this.form.action='{{ path('draw-Json') }}';"
+        >
+        <h2>Dra flera kort</h2>
+    <input type="submit" name="draw-mul" value="Dra 5"
+        onClick="this.form.action='{{ path('draw-mul-Json', {num: 5}) }}';"
+    >
+
+    </p>
+</form>
+{% endblock %}

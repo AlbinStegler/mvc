@@ -3,21 +3,25 @@
 namespace App\Card;
 
 use App\Card\CardGraphic;
-class DeckOfCards {
+
+class DeckOfCards
+{
     protected $cards;
     protected $size;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->cards = [];
         $this->size = 0;
     }
 
-    public function setupDeck() {
+    public function setupDeck()
+    {
         $style = ["clubs", "hearts", "spades", "diamonds"];
 
-        for ($x = 2; $x <= 14; $x++){
+        for ($x = 2; $x <= 14; $x++) {
             for ($i = 0; $i < 4; $i++) {
-                $current = new CardGraphic;
+                $current = new CardGraphic();
                 $current->setValue($x);
                 $current->setType($style[$i]);
                 $current->setStyle();
@@ -27,12 +31,13 @@ class DeckOfCards {
         $this->size = 52;
     }
 
-    public function recreateDeck(Array $usedCards) {
+    public function recreateDeck(array $usedCards)
+    {
         $style = ["clubs", "hearts", "spades", "diamonds"];
         //Adding cards to deck
-        for ($x = 2; $x <= 14; $x++){
+        for ($x = 2; $x <= 14; $x++) {
             for ($i = 0; $i < 4; $i++) {
-                $current = new CardGraphic;
+                $current = new CardGraphic();
                 $current->setValue($x);
                 $current->setType($style[$i]);
                 $current->setStyle();
@@ -43,25 +48,29 @@ class DeckOfCards {
         foreach ($usedCards as $card) {
             $this->removeCard($card);
         }
-        
+
         $this->size = count($this->cards);
     }
 
-    public function removeCard(Card $cardToRemove) {
+    public function removeCard(Card $cardToRemove)
+    {
         $key = array_search($cardToRemove, $this->cards);
         if ($key !== false) {
             unset($this->cards[$key]);
             $this->size -= 1;
         }
     }
-    
-    public function addCard(Card $cardToAdd) {
+
+    public function addCard(Card $cardToAdd)
+    {
         $this->cards[] = $cardToAdd;
     }
-    public function shuffleDeck() {
+    public function shuffleDeck()
+    {
         shuffle($this->cards);
     }
-    public function drawCard() : CardGraphic {
+    public function drawCard(): CardGraphic
+    {
         dump($this->size);
         dump(($this->cards));
         $temp = array_shift($this->cards);
@@ -69,11 +78,13 @@ class DeckOfCards {
         return $temp;
     }
 
-    public function getDeckSize() : Int {
+    public function getDeckSize(): Int
+    {
         return $this->size;
     }
 
-    public function showDeck() : array {
+    public function showDeck(): array
+    {
         $deck = [];
         foreach ($this->cards as $card) {
             $deck[] = [
