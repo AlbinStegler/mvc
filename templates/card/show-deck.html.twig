@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Play cards{% endblock %}
+
+{% block main %}
+    {% for k in kort %}
+        <img class="card" src="{{ asset(k.style) }}">
+    {% endfor %}
+{% endblock %}

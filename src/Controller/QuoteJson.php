@@ -7,10 +7,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class QuoteJson extends AbstractController
 {
-    #[Route("/api/quote")]
+    #[Route("/api/quote", name: "quote")]
     public function jsonNumber(): Response
     {
         $date = date("Y-m-d");

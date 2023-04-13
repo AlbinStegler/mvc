@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(181, 181, 181);
+    overflow: auto;
+    margin: 0;
+    width: 100%;
+}
+
+main {
+    margin: 0 auto;
+    width: 600px;
+}
+
+h1 {
+    border-bottom: 4px double #ccc;
+}
+
+p {
+    word-wrap: break-word;
+}

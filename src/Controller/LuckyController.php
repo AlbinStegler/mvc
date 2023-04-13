@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LuckyController extends AbstractController
 {
-    #[Route('/lucky')]
+    #[Route('/lucky', name: "lucky")]
     public function number(): Response
     {
         $number = random_int(0, 100);
