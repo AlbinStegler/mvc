@@ -33,32 +33,44 @@ class CardGameController extends AbstractController
     #[Route("/game/start", name: "start")]
     public function start(SessionInterface $session): Response
     {
-        //Spelare och bank skapas
-        // $session->clear();
+        //Korten hämtas från session
         $hand = Helpers::getPlayerHand($session);
         $bankHand = Helpers::getBankHand($session);
-        $lost = False;
         $player = new Player($hand);
-        //Finns korten i sessionen för spelarna återskapas de
+
+        $playerLost = false;
+        $stop = false;
 
         //Spelare får val att dra kort om korten är under 21
         $playerRoll = $player->canIDraw($hand->getSum());
-        //Sparar draget kort till session och laddar om sidan med de nya värdena
         if (!$playerRoll && $hand->getSum() > 21) {
-            $lost = True;
+            dump($hand->getSum());
+            $playerLost = True;
         }
 
-        //OM SPELARE STANNAR
-
-        //Banken drar kort sparas till session och laddas in.
-
-        //Värdet kontrolleras om bank får dra mer
-
         //Vinnare räknas ut
-        $data = ["cards" => $hand->getCards(), "value" => $hand->getSum(),
-        "player" => $playerRoll, "lost" => $lost, "bankHand" => $bankHand->getCards(), "bankSum" => $bankHand->getSum()];
-        dump($hand);
-        dump($bankHand);
+        if ($session->has("stop") || $hand->getSum() == 21) {
+            $stop = true;
+            $playerWon = $player->playerWon($bankHand);
+            $data = ["cards" => $hand->getCards(),
+            "value" => $hand->getSum(),
+            "player" => $playerRoll,
+            "lost" => $playerLost,
+            "playerWon" => $playerWon,
+            "bankHand" => $bankHand->getCards(),
+            "bankSum" => $bankHand->getSum(),
+            "stop" => $stop];
+        } else {
+            $data = ["cards" => $hand->getCards(),
+            "value" => $hand->getSum(),
+            "player" => $playerRoll,
+            "lost" => $playerLost,
+            "bankHand" => $bankHand->getCards(),
+            "bankSum" => $bankHand->getSum(),
+            "stop" => $stop];
+        }
+
+
 
         return $this->render('cardgame/start.html.twig' , $data);
     }
@@ -72,6 +84,7 @@ class CardGameController extends AbstractController
         $drawn = $deck->drawCard();
         $hand->add($drawn);
 
+        //Sparar draget kort till session och redirectar till startsida
 
         Helpers::savePlayerHand($session, [$drawn->showCard()]);
         Helpers::saveBlackjackDeckToSession($session, [$drawn->showCard()]);
@@ -88,17 +101,23 @@ class CardGameController extends AbstractController
     #[Route("/game/start/bank", name: "bank-draw", methods: ['POST'])]
     public function bankDraw(SessionInterface $session): Response
     {
+        //OM SPELARE STANNAR
         $deck = Helpers::createBlackjackDeckFromSession($session);
         $hand = Helpers::getBankHand($session);
+        $bank = new Bank($hand);
         $deck->shuffleDeck();
+        $session->set("stop", true);
 
-        while ($hand->getSum() < 21) {
+        $allDrawn = [];
+        //Banken drar kort sparas till session och laddas in.
+        while ($bank->canIDraw($hand->getSum())) {
             $drawn = $deck->drawCard();
             $hand->add($drawn);
+            $allDrawn[] = $drawn->showCard();
         }
 
 
-        Helpers::saveBankHand($session, [$drawn->showCard()]);
+        Helpers::saveBankHand($session, $allDrawn);
         Helpers::saveBlackjackDeckToSession($session, [$drawn->showCard()]);
         return $this->redirectToRoute('start');
     }

@@ -9,6 +9,16 @@ class BlackjackHand extends CardHand
         parent::__construct();
     }
 
+    public function playerWon(BlackjackHand $player, BlackjackHand $bank) : bool
+    {
+        $playerWon = false;
+
+        if ($bank->getSum() < $player->getSum() && $player->getSum() <= 21) {
+            $playerWon = true;
+        }
+
+        return $playerWon;
+    }
     public function getSum() : int {
         // if (count($this->cards) != 0) {
         //     return 0;
@@ -23,7 +33,6 @@ class BlackjackHand extends CardHand
                 $countAces++;
             }
             elseif ($card->showCard()["value"] < 14 && $card->showCard()["value"] > 10) {
-                dump($card->showCard()["value"]);
                 $sum += 10;
                 // $card->setValue(10);
             } else {
@@ -33,7 +42,7 @@ class BlackjackHand extends CardHand
 
         if ($sum > 21) {
             foreach ($this->cards as $card) {
-                if ($card->showCard()["value"] == 11 ) {
+                if ($card->showCard()["value"] == 14 ) {
                     // $card->setValue(1);
                     $sum -= 10;
                     if ($sum <= 21) {
