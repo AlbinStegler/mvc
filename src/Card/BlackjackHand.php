@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Card;
+
 class BlackjackHand extends CardHand
 {
-
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function playerWon(BlackjackHand $player, BlackjackHand $bank) : bool
+    public function playerWon(BlackjackHand $player, BlackjackHand $bank): bool
     {
         $playerWon = false;
 
@@ -19,7 +19,8 @@ class BlackjackHand extends CardHand
 
         return $playerWon;
     }
-    public function getSum() : int {
+    public function getSum(): int
+    {
         // if (count($this->cards) != 0) {
         //     return 0;
         // }
@@ -31,10 +32,9 @@ class BlackjackHand extends CardHand
                 $sum += 11;
                 // $card->setValue(11);
                 $countAces++;
-            }
-            elseif ($card->showCard()["value"] < 14 && $card->showCard()["value"] > 10) {
+            } elseif ($card->showCard()["value"] < 14 && $card->showCard()["value"] > 10) {
                 $sum += 10;
-                // $card->setValue(10);
+            // $card->setValue(10);
             } else {
                 $sum += $card->showCard()["value"];
             }
@@ -42,7 +42,7 @@ class BlackjackHand extends CardHand
 
         if ($sum > 21) {
             foreach ($this->cards as $card) {
-                if ($card->showCard()["value"] == 14 ) {
+                if ($card->showCard()["value"] == 14) {
                     // $card->setValue(1);
                     $sum -= 10;
                     if ($sum <= 21) {

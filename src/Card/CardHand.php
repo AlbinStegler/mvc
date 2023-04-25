@@ -30,7 +30,8 @@ class CardHand
         return $arr;
     }
 
-    public function getSum() : int {
+    public function getSum(): int
+    {
         // if (count($this->cards) != 0) {
         //     return 0;
         // }

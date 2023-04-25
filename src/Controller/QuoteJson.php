@@ -56,7 +56,8 @@ class QuoteJson extends AbstractController
     #[Route("/api/deck/draw", name: "draw-Json", methods: ['POST'])]
     public function draw(SessionInterface $session): Response
     {
-        $deck = Helpers::createDeckFromSession($session);
+        $helper = new Helpers();
+        $deck = $helper->createDeckFromSession($session);
         $deck->shuffleDeck();
         $drawn = $deck->drawCard()->showCard();
         $data = ["draget-kort" => $drawn,
@@ -66,14 +67,15 @@ class QuoteJson extends AbstractController
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
-        Helpers::saveToSession($session, [$drawn]);
+        $helper->saveToSession($session, [$drawn]);
         return $response;
     }
 
     #[Route("/api/deck/draw/{num<\d+>}", name: "draw-mul-Json", methods: ['POST'])]
     public function drawMultiple(int $num, SessionInterface $session): Response
     {
-        $deck = Helpers::createDeckFromSession($session);
+        $helper = new Helpers();
+        $deck = $helper->createDeckFromSession($session);
         $deck->shuffleDeck();
         $thisTurn = [];
         if ($num > $deck->getDeckSize()) {
@@ -84,7 +86,7 @@ class QuoteJson extends AbstractController
             }
         }
 
-        Helpers::saveToSession($session, $thisTurn);
+        $helper->saveToSession($session, $thisTurn);
         $data = ["kort" => $thisTurn, "antal" => $deck->getDeckSize()];
 
         $response = new JsonResponse($data);

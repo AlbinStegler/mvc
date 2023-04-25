@@ -33,9 +33,10 @@ class CardGameController extends AbstractController
     #[Route("/game/start", name: "start")]
     public function start(SessionInterface $session): Response
     {
+        $helper = new Helpers();
         //Korten hämtas från session
-        $hand = Helpers::getPlayerHand($session);
-        $bankHand = Helpers::getBankHand($session);
+        $hand = $helper->getPlayerHand($session);
+        $bankHand = $helper->getBankHand($session);
         $player = new Player($hand);
 
         $playerLost = false;
@@ -45,7 +46,7 @@ class CardGameController extends AbstractController
         $playerRoll = $player->canIDraw($hand->getSum());
         if (!$playerRoll && $hand->getSum() > 21) {
             dump($hand->getSum());
-            $playerLost = True;
+            $playerLost = true;
         }
 
         //Vinnare räknas ut
@@ -72,22 +73,24 @@ class CardGameController extends AbstractController
 
 
 
-        return $this->render('cardgame/start.html.twig' , $data);
+        return $this->render('cardgame/start.html.twig', $data);
     }
 
     #[Route("/game/start/player-draw", name: "player-draw", methods: ['POST'])]
     public function drawPlayer(SessionInterface $session): Response
     {
-        $deck = Helpers::createBlackjackDeckFromSession($session);
-        $hand = Helpers::getPlayerHand($session);
+        $helper = new Helpers();
+
+        $deck = $helper->createBlackjackDeckFromSession($session);
+        $hand = $helper->getPlayerHand($session);
         $deck->shuffleDeck();
         $drawn = $deck->drawCard();
         $hand->add($drawn);
 
         //Sparar draget kort till session och redirectar till startsida
 
-        Helpers::savePlayerHand($session, [$drawn->showCard()]);
-        Helpers::saveBlackjackDeckToSession($session, [$drawn->showCard()]);
+        $helper->savePlayerHand($session, [$drawn->showCard()]);
+        $helper->saveBlackjackDeckToSession($session, [$drawn->showCard()]);
         return $this->redirectToRoute('start');
     }
 
@@ -102,8 +105,9 @@ class CardGameController extends AbstractController
     public function bankDraw(SessionInterface $session): Response
     {
         //OM SPELARE STANNAR
-        $deck = Helpers::createBlackjackDeckFromSession($session);
-        $hand = Helpers::getBankHand($session);
+        $helper = new Helpers();
+        $deck = $helper->createBlackjackDeckFromSession($session);
+        $hand = $helper->getBankHand($session);
         $bank = new Bank($hand);
         $deck->shuffleDeck();
         $session->set("stop", true);
@@ -117,8 +121,8 @@ class CardGameController extends AbstractController
         }
 
 
-        Helpers::saveBankHand($session, $allDrawn);
-        Helpers::saveBlackjackDeckToSession($session, [$drawn->showCard()]);
+        $helper->saveBankHand($session, $allDrawn);
+        $helper->saveBlackjackDeckToSession($session, [$drawn->showCard()]);
         return $this->redirectToRoute('start');
     }
 }

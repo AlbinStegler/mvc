@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Game;
+
 use App\Card\CardHand;
 
 class Bank
@@ -12,11 +13,12 @@ class Bank
         $this->cardHand = $handOfCards;
     }
 
-    public function canIDraw(int $sum) : bool {
+    public function canIDraw(int $sum): bool
+    {
         if ($sum < 17) {
-            return True;
+            return true;
         } else {
-            return False;
+            return false;
         }
     }
 

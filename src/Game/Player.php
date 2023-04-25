@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Game;
+
 use App\Card\CardHand;
 use App\Card\BlackjackHand;
-
 
 class Player
 {
@@ -13,7 +13,7 @@ class Player
     {
         $this->cardHand = $handOfCards;
     }
-    public function playerWon(BlackjackHand $bank) : bool
+    public function playerWon(BlackjackHand $bank): bool
     {
         $sBank = $bank->getSum();
         $sPlayer = $this->cardHand->getSum();
@@ -29,11 +29,12 @@ class Player
             }
         }
     }
-    public function canIDraw(int $sum) : bool {
+    public function canIDraw(int $sum): bool
+    {
         if ($sum < 21) {
-            return True;
+            return true;
         } else {
-            return False;
+            return false;
         }
     }
 

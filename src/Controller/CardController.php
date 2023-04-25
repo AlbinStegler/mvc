@@ -42,11 +42,12 @@ class CardController extends AbstractController
     #[Route("/card/deck/draw", name: "show-one-card")]
     public function draw(SessionInterface $session): Response
     {
-        $deck = Helpers::createDeckFromSession($session);
+        $helper = new Helpers();
+        $deck = $helper->createDeckFromSession($session);
         $deck->shuffleDeck();
         $card = $deck->drawCard()->showCard();
         $data = ["kort" => $card, "antal" => $deck->getDeckSize()];
-        Helpers::saveToSession($session, [$card]);
+        $helper->saveToSession($session, [$card]);
         return $this->render('card/show-drawn-card.html.twig', $data);
     }
 
@@ -84,8 +85,8 @@ class CardController extends AbstractController
     #[Route("/card/deck/draw/{num<\d+>}", name: "show-multiple")]
     public function drawAmount(SessionInterface $session, int $num): Response
     {
-        $session->clear();
-        $deck = Helpers::createDeckFromSession($session);
+        $helper = new Helpers();
+        $deck = $helper->createDeckFromSession($session);
         $deck->shuffleDeck();
         $thisTurn = [];
         if ($num > $deck->getDeckSize()) {
@@ -96,7 +97,8 @@ class CardController extends AbstractController
             }
         }
 
-        Helpers::saveToSession($session, $thisTurn);
+        $helper->saveToSession($session, $thisTurn);
+
         $data = ["kort" => $thisTurn, "antal" => $deck->getDeckSize()];
 
         return $this->render('card/show-multiple-drawn-card.html.twig', $data);

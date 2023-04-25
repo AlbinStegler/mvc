@@ -12,7 +12,6 @@ class Helpers
 {
     public static function createDeckFromSession(SessionInterface $session): DeckOfCards
     {
-
         $deck = new DeckOfCards();
         if ($session->has("usedCards")) {
             $used = $session->get("usedCards");
@@ -25,9 +24,9 @@ class Helpers
                 $cardArr[] = $tCard;
             }
             $deck->recreateDeck($cardArr);
-        } else {
-            $deck->setupDeck();
+            return $deck;
         }
+        $deck->setupDeck();
 
         return $deck;
     }
@@ -38,9 +37,10 @@ class Helpers
         if ($session->has("usedCards")) {
             $allUsed = array_merge($drawnCards, $thisTurn);
             $session->set("usedCards", $allUsed);
-        } else {
-            $session->set("usedCards", $thisTurn);
+            return "session exists";
         }
+        $session->set("usedCards", $thisTurn);
+        return "session created";
     }
 
 
@@ -58,9 +58,9 @@ class Helpers
                 $cardArr[] = $tCard;
             }
             $deck->recreateDeck($cardArr);
-        } else {
-            $deck->setupDeck();
+            return $deck;
         }
+        $deck->setupDeck();
 
         return $deck;
     }
@@ -70,12 +70,15 @@ class Helpers
         if ($session->has("blackjackDeck")) {
             $allUsed = array_merge($drawnCards, $thisTurn);
             $session->set("blackjackDeck", $allUsed);
-        } else {
-            $session->set("blackjackDeck", $thisTurn);
+            return "session exists";
         }
+        $session->set("blackjackDeck", $thisTurn);
+        return "session created";
+
     }
 
-    public static function getPlayerHand(SessionInterface $session) {
+    public static function getPlayerHand(SessionInterface $session)
+    {
         $hand = new BlackjackHand();
         if ($session->has("blackjackHand")) {
             $used = $session->get("blackjackHand");
@@ -96,12 +99,14 @@ class Helpers
         if ($session->has("blackjackHand")) {
             $allUsed = array_merge($drawnCards, $thisTurn);
             $session->set("blackjackHand", $allUsed);
-        } else {
-            $session->set("blackjackHand", $thisTurn);
+            return "session exists";
         }
+        $session->set("blackjackHand", $thisTurn);
+        return "session created";
     }
 
-    public static function getBankHand(SessionInterface $session) {
+    public static function getBankHand(SessionInterface $session)
+    {
         $hand = new BlackjackHand();
         if ($session->has("bankHand")) {
             $used = $session->get("bankHand");
@@ -122,9 +127,11 @@ class Helpers
         if ($session->has("bankHand")) {
             $allUsed = array_merge($drawnCards, $thisTurn);
             $session->set("bankHand", $allUsed);
-        } else {
-            $session->set("bankHand", $thisTurn);
+            return "session exists";
         }
+
+        $session->set("bankHand", $thisTurn);
+        return "session created";
     }
 
 }
