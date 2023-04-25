@@ -25,7 +25,7 @@ class CardGraphic extends Card
         if ($this->value > 10) {
             $clothedCards = ["11" => "jack", "12" => "queen", "13" => "king", "14" => "ace"];
             $this->imgPath = "img/cards/" . $folder . "/" . $clothedCards[$this->value] . "_of_" .$this->type . ".svg";
-        } else {
+        } if ($this->value <= 10) {
             $this->imgPath = "img/cards/" . $folder . "/" . $this->value . "_of_" .$this->type . ".svg";
         }
     }

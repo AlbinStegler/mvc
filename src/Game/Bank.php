@@ -17,9 +17,8 @@ class Bank
     {
         if ($sum < 17) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
 }

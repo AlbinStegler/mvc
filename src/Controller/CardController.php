@@ -14,7 +14,7 @@ use App\Card\CardGraphic;
 class CardController extends AbstractController
 {
     #[Route("/card", name: "landing-page")]
-    public function start(SessionInterface $session): Response
+    public function start(): Response
     {
         return $this->render('card/card-landingpage.html.twig');
     }
@@ -91,7 +91,8 @@ class CardController extends AbstractController
         $thisTurn = [];
         if ($num > $deck->getDeckSize()) {
             $session->clear();
-        } else {
+        }
+        if ($num <= $deck->getDeckSize()) {
             for ($i = 0; $i < $num; $i++) {
                 $thisTurn[] = $deck->drawCard()->showCard();
             }

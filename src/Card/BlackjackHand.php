@@ -35,7 +35,7 @@ class BlackjackHand extends CardHand
             } elseif ($card->showCard()["value"] < 14 && $card->showCard()["value"] > 10) {
                 $sum += 10;
             // $card->setValue(10);
-            } else {
+            } elseif ($card->showCard()["value"] <= 10) {
                 $sum += $card->showCard()["value"];
             }
         }

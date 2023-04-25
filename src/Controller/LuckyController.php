@@ -21,7 +21,7 @@ class LuckyController extends AbstractController
     }
 
     #[Route("/lucky/hi")]
-    public function hi(): Response
+    public function testhi(): Response
     {
         return new Response(
             '<html><body>Hi to you!</body></html>'

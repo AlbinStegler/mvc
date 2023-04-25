@@ -52,6 +52,7 @@ class CardGameController extends AbstractController
         //Vinnare räknas ut
         if ($session->has("stop") || $hand->getSum() == 21) {
             $stop = true;
+            $session->set("stop", true);
             $playerWon = $player->playerWon($bankHand);
             $data = ["cards" => $hand->getCards(),
             "value" => $hand->getSum(),
@@ -61,7 +62,8 @@ class CardGameController extends AbstractController
             "bankHand" => $bankHand->getCards(),
             "bankSum" => $bankHand->getSum(),
             "stop" => $stop];
-        } else {
+            dump($playerWon);
+        } if (!$session->has("stop")) {
             $data = ["cards" => $hand->getCards(),
             "value" => $hand->getSum(),
             "player" => $playerRoll,
