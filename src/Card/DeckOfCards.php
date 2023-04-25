@@ -71,8 +71,6 @@ class DeckOfCards
     }
     public function drawCard(): CardGraphic
     {
-        dump($this->size);
-        dump(($this->cards));
         $temp = array_shift($this->cards);
         $this->size -= 1;
         return $temp;

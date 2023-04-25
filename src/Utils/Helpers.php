@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use App\Card\DeckOfCards;
 use App\Card\CardGraphic;
+use App\Card\BlackjackHand;
 
 class Helpers
 {
@@ -39,6 +40,90 @@ class Helpers
             $session->set("usedCards", $allUsed);
         } else {
             $session->set("usedCards", $thisTurn);
+        }
+    }
+
+
+    public static function createBlackjackDeckFromSession(SessionInterface $session): DeckOfCards
+    {
+        $deck = new DeckOfCards();
+        if ($session->has("blackjackDeck")) {
+            $used = $session->get("blackjackDeck");
+            $cardArr = [];
+            foreach ($used as $card) {
+                $tCard = new CardGraphic();
+                $tCard->setValue($card["value"]);
+                $tCard->setType($card["type"]);
+                $tCard->setStyle();
+                $cardArr[] = $tCard;
+            }
+            $deck->recreateDeck($cardArr);
+        } else {
+            $deck->setupDeck();
+        }
+
+        return $deck;
+    }
+    public static function saveBlackjackDeckToSession(SessionInterface $session, array $thisTurn)
+    {
+        $drawnCards = $session->get("blackjackDeck");
+        if ($session->has("blackjackDeck")) {
+            $allUsed = array_merge($drawnCards, $thisTurn);
+            $session->set("blackjackDeck", $allUsed);
+        } else {
+            $session->set("blackjackDeck", $thisTurn);
+        }
+    }
+
+    public static function getPlayerHand(SessionInterface $session) {
+        $hand = new BlackjackHand();
+        if ($session->has("blackjackHand")) {
+            $used = $session->get("blackjackHand");
+            foreach ($used as $card) {
+                $tCard = new CardGraphic();
+                $tCard->setValue($card["value"]);
+                $tCard->setType($card["type"]);
+                $tCard->setStyle();
+                $hand->add($tCard);
+            }
+        }
+        return $hand;
+    }
+
+    public static function savePlayerHand(SessionInterface $session, array $thisTurn)
+    {
+        $drawnCards = $session->get("blackjackHand");
+        if ($session->has("blackjackHand")) {
+            $allUsed = array_merge($drawnCards, $thisTurn);
+            $session->set("blackjackHand", $allUsed);
+        } else {
+            $session->set("blackjackHand", $thisTurn);
+        }
+    }
+
+    public static function getBankHand(SessionInterface $session) {
+        $hand = new BlackjackHand();
+        if ($session->has("bankHand")) {
+            $used = $session->get("bankHand");
+            foreach ($used as $card) {
+                $tCard = new CardGraphic();
+                $tCard->setValue($card["value"]);
+                $tCard->setType($card["type"]);
+                $tCard->setStyle();
+                $hand->add($tCard);
+            }
+        }
+        return $hand;
+    }
+
+    public static function saveBankHand(SessionInterface $session, array $thisTurn)
+    {
+        $drawnCards = $session->get("bankHand");
+        if ($session->has("bankHand")) {
+            $allUsed = array_merge($drawnCards, $thisTurn);
+            $session->set("bankHand", $allUsed);
+        } else {
+            $session->set("bankHand", $thisTurn);
         }
     }
 

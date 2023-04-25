@@ -76,7 +76,6 @@ class QuoteJson extends AbstractController
         $deck = Helpers::createDeckFromSession($session);
         $deck->shuffleDeck();
         $thisTurn = [];
-        dump($deck);
         if ($num > $deck->getDeckSize()) {
             $session->clear();
         } else {

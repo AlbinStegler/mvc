@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Dokumentation{% endblock %}
+
+{% block main %}
+    <h2>Flowchart</h2>
+    <p>Detta är en start på min dokumentation för spelet blackjack. Detta är flödesschemat som skapades i början på uppgiften för att visualisera processen av en spelomgång.</p>
+    <img src='{{ asset("img/Flödesschema.png") }}'>
+    <h2>Psudo-kod</h2>
+    <p>Detta är grunden för hur jag tänker att mitt Blackjackspel ska fungera.</p>
+    <img src='{{ asset("img/psudo.png") }}'>
+    <p>Klasserna som behövs för att skapa spelet är en klass för spelaren samt en klass för banken. Dessa tänker jag ska innehålla de olika reglerna som de har. Samt att de ska använda sig av klassen CardHand för att hålla i korten.</p>
+
+{% endblock %}

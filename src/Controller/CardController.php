@@ -14,9 +14,8 @@ use App\Card\CardGraphic;
 class CardController extends AbstractController
 {
     #[Route("/card", name: "landing-page")]
-    public function start(): Response
+    public function start(SessionInterface $session): Response
     {
-
         return $this->render('card/card-landingpage.html.twig');
     }
 
@@ -47,7 +46,6 @@ class CardController extends AbstractController
         $deck->shuffleDeck();
         $card = $deck->drawCard()->showCard();
         $data = ["kort" => $card, "antal" => $deck->getDeckSize()];
-        dump($session->get("usedCard"));
         Helpers::saveToSession($session, [$card]);
         return $this->render('card/show-drawn-card.html.twig', $data);
     }
@@ -86,11 +84,10 @@ class CardController extends AbstractController
     #[Route("/card/deck/draw/{num<\d+>}", name: "show-multiple")]
     public function drawAmount(SessionInterface $session, int $num): Response
     {
-
+        $session->clear();
         $deck = Helpers::createDeckFromSession($session);
         $deck->shuffleDeck();
         $thisTurn = [];
-        dump($deck);
         if ($num > $deck->getDeckSize()) {
             $session->clear();
         } else {
