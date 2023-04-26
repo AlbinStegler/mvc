@@ -121,7 +121,7 @@ class CardGameController extends AbstractController
             $allDrawn[] = $drawn->showCard();
         }
 
-
+        //Sparar till session
         $helper->saveBankHand($session, $allDrawn);
         $helper->saveBlackjackDeckToSession($session, [$drawn->showCard()]);
         return $this->redirectToRoute('start');
