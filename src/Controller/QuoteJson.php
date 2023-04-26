@@ -130,7 +130,7 @@ class QuoteJson extends AbstractController
     public function game(SessionInterface $session): Response
     {
         $helper = new Helpers();
-
+        //Hämtar kort från session
         $bank = $helper->getBankHand($session);
         $player = $helper->getPlayerHand($session);
         $deck = $helper->createDeckFromSession($session);
