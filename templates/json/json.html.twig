@@ -22,7 +22,10 @@
     <input type="submit" name="draw-mul" value="Dra 5"
         onClick="this.form.action='{{ path('draw-mul-Json', {num: 5}) }}';"
     >
-
+    <h2>Visa Blackjack som JSON</h2>
+    <input type="submit" name="draw-mul" value="Visa poäng"
+        onClick="this.form.action='{{ path('game-stats') }}';"
+    >
     </p>
 </form>
 {% endblock %}

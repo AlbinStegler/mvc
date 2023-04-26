@@ -45,7 +45,6 @@ class CardGameController extends AbstractController
         //Spelare får val att dra kort om korten är under 21
         $playerRoll = $player->canIDraw($hand->getSum());
         if (!$playerRoll && $hand->getSum() > 21) {
-            dump($hand->getSum());
             $playerLost = true;
         }
 
@@ -62,7 +61,6 @@ class CardGameController extends AbstractController
             "bankHand" => $bankHand->getCards(),
             "bankSum" => $bankHand->getSum(),
             "stop" => $stop];
-            dump($playerWon);
         } if (!$session->has("stop")) {
             $data = ["cards" => $hand->getCards(),
             "value" => $hand->getSum(),

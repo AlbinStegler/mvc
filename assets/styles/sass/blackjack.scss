@@ -1,0 +1,26 @@
+.game-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bank {
+    height: 25vh;
+    text-align: center;
+}
+
+.player {
+    height: 25vh;
+    text-align: center;
+}
+
+.blackjackcard {
+
+    width: 15%;
+    height: fit-content;
+}
+
+.points {
+    margin: 0;
+    font-size: 2em;
+}

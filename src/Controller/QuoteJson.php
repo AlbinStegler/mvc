@@ -125,4 +125,27 @@ class QuoteJson extends AbstractController
 
         return $response;
     }
+
+    #[Route("/api/game", name: "game-stats", methods: ['POST'])]
+    public function game(SessionInterface $session): Response
+    {
+        $helper = new Helpers();
+
+        $bank = $helper->getBankHand($session);
+        $player = $helper->getPlayerHand($session);
+        $deck = $helper->createDeckFromSession($session);
+        $deck->shuffleDeck();
+
+        dump($bank);
+        dump($player);
+
+        $data = ["bank" => $bank->getCards(), "spelare" => $player->getCards(), "deck" => $deck->showDeck()];
+
+        $response = new JsonResponse($data);
+
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
 }

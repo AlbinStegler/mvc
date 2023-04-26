@@ -1,0 +1,11 @@
+input {
+    padding: 1em;
+    border: 0px;
+    font-weight: bold;
+}
+
+input:hover {
+    background-color: gray;
+    box-shadow: 2px 2px;
+    cursor: pointer;
+}

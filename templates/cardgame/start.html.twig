@@ -9,42 +9,49 @@
         {% else %}
             <h1>Banken vann</h1>
         {% endif %}
+    {% else %}
+        <h1>Spelare drag</h1>
     {% endif %}
+    <div class="bank">
+        <h2>Bank</h2>
+        {% for c in bankHand %}
+            <img class="blackjackcard" src="{{ asset(c.style) }}">
+        {% endfor %}
+        <h2 class="points">{{ bankSum }}</h2>
+    </div>
 
-    <h2>Bank</h2>
-    {% for c in bankHand %}
-        <img class="card" src="{{ asset(c.style) }}">
-    {% endfor %}
-
-
-        <h2>{{ bankSum }}</h2>
-    <h2>Spelare</h2>
-
-    {% for c in cards %}
-        <img class="card" src="{{ asset(c.style) }}">
-    {% endfor %}
-        <h2>{{ value }}</h2>
-
-<form method="post" action="">
-    <p>
+    <div class="player">
+        <h2>Spelare</h2>
+        {% for c in cards %}
+            <img class="blackjackcard" src="{{ asset(c.style) }}">
+        {% endfor %}
+            <h2 class="points">{{ value }}</h2>
+    </div>
+<form class="game-form" method="post" action="">
+    <div class="game-button">
         {% if (player and lost == false and stop == false) %}
             <h2>Dra kort</h2>
             <input type="submit" name="Dra kort" value="Dra kort"
                 onClick="this.form.action='{{ path('player-draw') }}';"
             >
+    </div>
+    <div class="game-button">
             <h2>Stanna</h2>
             <input type="submit" name="stop" value="Stanna"
                 onClick="this.form.action='{{ path('bank-draw') }}';"
             >
+    </div>
         {% endif %}
+    <div class="game-button">
             <h2>Starta om</h2>
             <input type="submit" name="Starta om" value="Starta om"
                 onClick="this.form.action='{{ path('reset') }}';"
             >
+    </div>
         {% if (lost) %}
         <h1>Du blev tjock</h1>
         {% endif %}
-    </p>
+
 </form>
 
 {% endblock %}

@@ -9,6 +9,6 @@
     <a href='{{path("show-one-card")}}'><h2>Visa draget kort</h2></a>
     <a href='{{path("show-one-card")}}/5'><h2>Dra 5 kort</h2></a>
     <p>För att skapa en kortlek med kort i måste man köra setupDeck eller recreateDeck annars kommer den vara tom. Efter att man har kört någon av dessa så behöver man blanda kortleken. Ett kort består av ett värde samt en "färg" och CardGraphic som ärver från Card har en imgPath som leder till rätt bild för kortet. CardGraphic avgör själv vilken path som den ska använda sig av. För att den ska få en satt imgPath måste man köra setStyle. Innan man kör setStyle måste man ge ett värde till sina kort med funktionerna setValue och setType<p>
-    <img src='{{ asset("img/drawio.png") }}'>
+    <img class="big-img" src='{{ asset("img/drawio.png") }}'>
 
 {% endblock %}
