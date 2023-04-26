@@ -23,9 +23,12 @@
     <p>Det var ett tag sedan jag arbetade med flödesdiagram. Men efter att ha skapat dessa listade jag ganska snabbt ut att jag skulle arbeta med post formulär. Det skapade också en tydlig överblick som förenklade att ta itag med mindre problem. Tack vare att jag hade skapat dessa tror jag att det blev lättare att komma igång och att se delproblemen som behövdes lösas. Däremot var det en klass som jag inte hade räknat med i mitt flödesdiagram samt psudokod.</p>
     <p>Jag löste uppgiften genom att implementera tre nya klasser. De klasserna var en för spelaren, en för banken samt en klass för en ny korthand. Det som dessa klassernas huvuduppgifter var.
     <h4>Korthanden</h4>
-    <p>Det denna klass huvuduppgift var att summera handens poäng. Eftersom att korten i blackjack räknas som andra poäng skötte klassen en omformatering av kortens poäng.</p>
+    <p>Det denna klass huvuduppgift var att summera handens poäng. Eftersom att korten i blackjack räknas som andra poäng gör klassen en omformatering av kortens poäng.</p>
     <h4>Player och Bank</h4>
     <p>Dessa klasserna hade samma uppgift och det var att räkna ut om de får dra fler kort enligt reglerna i blackjack. Eftersom att reglerna är olika för banken och spelaren skapades två olika klasser för att hantera denna kontroll.</p>
+    <p>Hanteringen av session flyttade jag ut i en klass som jag kallar för helper, den klassen använder jag för att minska koden som finns i mina controllers. Eftersom att hämtande samt sparande i session sker i flera kontroller kändes detta som en bra lösning.</p>
+    <p>Jag är nöjd med min lösning som helhet om det är något som jag skulle förbättra är det att skicka in hela kortleken i session för att skapa den så att alla kort ligger i den ordning som de gjorde innan. När jag tog beslutet att skicka in de dragna korten ansåg jag att det var bättre då sessionen inte behövde hålla lika mycket data. Men i efterhand inser jag att det inte är så stor skillnad eftersom att när jag dragit 51 kort måste sessionen fortfarande hålla i 51 kort.</p>
+    <p>Nu känner jag att jag börjar få koll på hur man arbetar i symfony. Jag skulle säga att det påminner om hur man arbetade i flask i den tidigare python kursen.</p>
     <h2 id="4">Kmom04</h2>
     <h2 id="5">Kmom05</h2>
     <h2 id="6">Kmom06</h2>
