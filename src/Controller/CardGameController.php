@@ -80,7 +80,7 @@ class CardGameController extends AbstractController
     public function drawPlayer(SessionInterface $session): Response
     {
         $helper = new Helpers();
-
+        //Hämtar från Session
         $deck = $helper->createBlackjackDeckFromSession($session);
         $hand = $helper->getPlayerHand($session);
         $deck->shuffleDeck();
