@@ -23,20 +23,20 @@ class Card
         $this->type = $newType;
     }
 
-    public function getValue(): int
+    public function getValue(): int | null
     {
         return $this->value;
     }
 
-    public function getType(): string
+    public function getType(): string | null
     {
         return $this->type;
     }
 
-    public function toArr(): array
-    {
-        return ["type" => $this->type, "value" => $this->value];
-    }
+    // public function toArr(): array
+    // {
+    //     return ["type" => $this->type, "value" => $this->value];
+    // }
 
     public function showCard(): array
     {

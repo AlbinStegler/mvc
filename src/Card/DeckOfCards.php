@@ -52,7 +52,8 @@ class DeckOfCards
         $this->size = count($this->cards);
     }
 
-    public function removeCard(Card $cardToRemove)
+
+    public function removeCard(CardGraphic $cardToRemove)
     {
         $key = array_search($cardToRemove, $this->cards);
         if ($key !== false) {
@@ -92,5 +93,19 @@ class DeckOfCards
             ];
         }
         return $deck;
+    }
+
+    public function equal(DeckOfCards $other) : bool {
+
+        if ($other->getDeckSize() == $this->getDeckSize()){
+            $deck1 = $other->showDeck();
+            $deck2 = $this->showDeck();
+            for ($i = 0; $i < $other->getDeckSize() - 1; $i++){
+                if ($deck1[$i] != $deck2[$i]){
+                    return false;
+                }
+            }
+        }
+        return True;
     }
 }
