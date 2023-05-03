@@ -17,13 +17,15 @@ class PlayerTest extends TestCase
         $this->assertInstanceOf("\App\Game\Player", $player);
     }
 
-    public function testPlayerBlackjack() {
+    public function testDraw() {
         $cardHand = new BlackjackHand();
         $this->assertEquals($cardHand->getCards(), []);
         
         $sum = $cardHand->getSum();
-        $bank = new Player($cardHand);
-        $this->assertFalse($bank->canIDraw($sum));
+        print_r($sum);
+        $player = new Player($cardHand);
+        $this->assertTrue($player->canIDraw($sum));
+        $this->assertFalse($player->canIDraw(21));
     }
 
 }
