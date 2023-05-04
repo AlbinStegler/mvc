@@ -11,6 +11,7 @@ class CardHand
 {
     /**
      * Cards that the "hand" holds
+     * @var array<Cardgraphic> $cards
      */
     protected $cards= [];
 
@@ -21,7 +22,7 @@ class CardHand
     /**
      * Adds a card to the hand
      */
-    public function add(CardGraphic $card)
+    public function add(CardGraphic $card) : void
     {
         $card->setStyle();
         $this->cards[] = $card;
@@ -29,7 +30,7 @@ class CardHand
     /**
      * Removes the card from the hand
      */
-    public function removeCard(CardGraphic $cardToRemove)
+    public function removeCard(CardGraphic $cardToRemove) : void
     {
         $key = array_search($cardToRemove, $this->cards);
         if ($key !== false) {
@@ -38,6 +39,7 @@ class CardHand
     }
     /**
      * Gets cards values in a array
+     * @return array<array{value: mixed, type: mixed, style: mixed}> $arr
      */
     public function getCards(): array
     {

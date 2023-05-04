@@ -6,6 +6,9 @@ use App\Card\CardHand;
 
 class Bank
 {
+    /**
+     * @var CardHand $cardHand
+     */
     protected $cardHand;
 
     public function __construct(CardHand $handOfCards)

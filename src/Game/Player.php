@@ -7,6 +7,9 @@ use App\Card\BlackjackHand;
 
 class Player
 {
+    /**
+     * @var CardHand $cardHand
+     */
     protected $cardHand;
 
     public function __construct(CardHand $handOfCards)

@@ -14,6 +14,8 @@ class BlackjackHand extends CardHand
     {
         parent::__construct();
     }
+
+
     /**
      * Used to see if the player won. Player won if sum is bigger than banks sum but less than 21
      */
@@ -68,6 +70,19 @@ class BlackjackHand extends CardHand
         }
 
         return $sum;
+    }
+
+    public function getHand() {
+        return $this->cards;
+    }
+
+    public function setHand(mixed $hand) {
+        $this->cards = $hand;
+    }
+
+    public function mergeCards(mixed $cards) {
+        $this->cards = array_merge($this->cards, $cards);
+        return $this->cards;
     }
 
 }

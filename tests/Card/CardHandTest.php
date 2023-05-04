@@ -9,13 +9,13 @@ use PHPUnit\Framework\TestCase;
  */
 class CardHandTest extends TestCase
 {
-    public function testCreateCardGraphic()
+    public function testCreateCardGraphic() : void
     {
         $card = new CardHand();
         $this->assertInstanceOf("\App\Card\CardHand", $card);
     }
 
-    public function testAddCards()
+    public function testAddCards() : void
     {
         $cardHand = new CardHand();
         $this->assertEquals($cardHand->getCards(), []);
@@ -36,7 +36,7 @@ class CardHandTest extends TestCase
 
     }
 
-    public function testGetSum()
+    public function testGetSum() : void
     {
         $cardHand = new CardHand();
         for ($i = 4; $i < 10; $i++) {

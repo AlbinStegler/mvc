@@ -9,13 +9,13 @@ use PHPUnit\Framework\TestCase;
  */
 class DeckOfCardsTest extends TestCase
 {
-    public function testCreateDeckOfCards()
+    public function testCreateDeckOfCards() : void
     {
         $card = new DeckOfCards();
         $this->assertInstanceOf("\App\Card\DeckOfCards", $card);
     }
 
-    public function testSetupDeck()
+    public function testSetupDeck() : void
     {
         $card = new DeckOfCards();
         $card->setupDeck();
@@ -30,6 +30,9 @@ class DeckOfCardsTest extends TestCase
         $times2 = 0;
 
         foreach ($cards as $c) {
+            /**
+             * @var array{value: int, type: string, style: string} $c
+             */
             $this->assertArrayHasKey("type", $c);
             $this->assertArrayHasKey("value", $c);
             $this->assertArrayHasKey("style", $c);
@@ -39,14 +42,14 @@ class DeckOfCardsTest extends TestCase
 
             if ($times1 < 3) {
                 $times1++;
-            } elseif ($times1 >= 3) {
+            } elseif ($times1 == 3) {
                 $times1 = 0;
                 $times2++;
             }
         }
     }
 
-    public function testRecreateDeck()
+    public function testRecreateDeck() : void
     {
         $card = new DeckOfCards();
         $card->setupDeck();
@@ -65,7 +68,7 @@ class DeckOfCardsTest extends TestCase
         $this->assertTrue($deck2->equal($card));
     }
 
-    public function testShuffleDeck()
+    public function testShuffleDeck() : void
     {
         $card1 = new DeckOfCards();
         $card1->setupDeck();
@@ -75,7 +78,7 @@ class DeckOfCardsTest extends TestCase
         $this->assertFalse($card1->equal($card2));
     }
 
-    public function testDrawCard()
+    public function testDrawCard() : void
     {
         $card1 = new DeckOfCards();
         $card1->setupDeck();

@@ -6,7 +6,13 @@ use App\Card\CardGraphic;
 
 class DeckOfCards
 {
+    /**
+     * @var array<CardGraphic> $cards
+     */
     protected $cards;
+    /**
+     * @var int $size
+     */
     protected $size;
 
     public function __construct()
@@ -15,7 +21,7 @@ class DeckOfCards
         $this->size = 0;
     }
 
-    public function setupDeck()
+    public function setupDeck() : void
     {
         $style = ["clubs", "hearts", "spades", "diamonds"];
 
@@ -30,8 +36,10 @@ class DeckOfCards
         }
         $this->size = 52;
     }
-
-    public function recreateDeck(array $usedCards)
+    /**
+     * @param CardGraphic[] $usedCards
+    */
+    public function recreateDeck(array $usedCards) : void
     {
         $style = ["clubs", "hearts", "spades", "diamonds"];
         //Adding cards to deck
@@ -53,7 +61,7 @@ class DeckOfCards
     }
 
 
-    public function removeCard(CardGraphic $cardToRemove)
+    public function removeCard(CardGraphic $cardToRemove) : void
     {
         $key = array_search($cardToRemove, $this->cards);
         if ($key !== false) {
@@ -62,35 +70,42 @@ class DeckOfCards
         }
     }
 
-    public function addCard(Card $cardToAdd)
+    public function addCard(CardGraphic $cardToAdd) : void
     {
         $this->cards[] = $cardToAdd;
     }
-    public function shuffleDeck()
+    public function shuffleDeck() : void
     {
         shuffle($this->cards);
     }
     public function drawCard(): CardGraphic
     {
-        $temp = array_shift($this->cards);
-        $this->size -= 1;
-        return $temp;
+        if (!empty($this->cards)){
+            $temp = array_shift($this->cards);
+            $this->size -= 1;
+            return $temp;
+        }
+        return new CardGraphic();
     }
 
     public function getDeckSize(): Int
     {
         return $this->size;
     }
-
+    /**
+    * @return array<mixed> $deck
+    */
     public function showDeck(): array
     {
         $deck = [];
-        foreach ($this->cards as $card) {
-            $deck[] = [
-                "value" => $card->getValue(),
-                "type" => $card->getType(),
-                "style" => $card->getImgPath()
-            ];
+        if (!empty($this->cards)) {
+            foreach ($this->cards as $card) {
+                $deck[] = [
+                    "value" => $card->getValue(),
+                    "type" => $card->getType(),
+                    "style" => $card->getImgPath()
+                ];
+            }
         }
         return $deck;
     }

@@ -36,6 +36,7 @@ class CardGameController extends AbstractController
         //Korten hämtas från session
         $hand = $helper->getPlayerHand($session);
         $bankHand = $helper->getBankHand($session);
+        dump($bankHand);
         $player = new Player($hand);
 
         $playerLost = false;
@@ -46,7 +47,7 @@ class CardGameController extends AbstractController
         if (!$playerRoll && $hand->getSum() > 21) {
             $playerLost = true;
         }
-
+        $data = [];
         //Vinnare räknas ut
         if ($session->has("stop") || $hand->getSum() == 21) {
             $stop = true;
@@ -114,6 +115,7 @@ class CardGameController extends AbstractController
 
         $allDrawn = [];
         //Banken drar kort sparas till session och laddas in.
+        $drawn = new CardGraphic();
         while ($bank->canIDraw($hand->getSum())) {
             $drawn = $deck->drawCard();
             $hand->add($drawn);

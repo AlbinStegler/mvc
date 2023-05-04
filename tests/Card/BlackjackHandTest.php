@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
  */
 class BlackjackHandTest extends TestCase
 {
-    public function testCreateBlackjackHand()
+    public function testCreateBlackjackHand() : void
     {
         $bHand = new BlackjackHand();
         $this->assertInstanceOf("\App\Card\BlackjackHand", $bHand);
@@ -17,55 +17,51 @@ class BlackjackHandTest extends TestCase
 
     private function createCardGraphic(int $value, string $type): CardGraphic
     {
-        $c1 = new CardGraphic();
-        $c1->setValue($value);
-        $c1->setType($type);
-        $c1->setStyle();
-        return $c1;
+        $card = new CardGraphic();
+        $card->setValue($value);
+        $card->setType($type);
+        $card->setStyle();
+        return $card;
     }
 
-    public function testPlayerWon()
+    public function testPlayerWon() : void
     {
         $player = new BlackjackHand();
         $bank = new BlackjackHand();
 
-        $c1 = $this->createCardGraphic(10, "Spades");
-        $c2 = $this->createCardGraphic(10, "Diamonds");
+        $card1 = $this->createCardGraphic(10, "Spades");
+        $card2 = $this->createCardGraphic(10, "Diamonds");
 
-        $player->add($c1);
-        $player->add($c2);
+        $player->add($card1);
+        $player->add($card2);
 
-        $c3 = $this->createCardGraphic(14, "Spades");
-        $c4 = $this->createCardGraphic(11, "Diamonds");
-        $bank->add($c3);
-        $bank->add($c4);
+        $card3 = $this->createCardGraphic(14, "Spades");
+        $card4 = $this->createCardGraphic(11, "Diamonds");
+        $bank->add($card3);
+        $bank->add($card4);
 
-        $c5 = $this->createCardGraphic(8, "Spades");
-        $c6 = $this->createCardGraphic(10, "Diamonds");
+        $card5 = $this->createCardGraphic(8, "Spades");
+        $card6 = $this->createCardGraphic(10, "Diamonds");
 
         $bank2 = new BlackjackHand();
-        $bank2->add($c5);
-        $bank2->add($c6);
+        $bank2->add($card5);
+        $bank2->add($card6);
 
         $this->assertTrue($player->playerWon($player, $bank2));
     }
 
-    public function testLowerPoints()
+    public function testLowerPoints() : void
     {
         $player = new BlackjackHand();
-        $c1 = $this->createCardGraphic(14, "Spades");
-        $c2 = $this->createCardGraphic(12, "Diamonds");
-        $c3 = $this->createCardGraphic(8, "Diamonds");
+        $card1 = $this->createCardGraphic(14, "Spades");
+        $card2 = $this->createCardGraphic(12, "Diamonds");
 
-
-
-        $player->add($c1);
-        $player->add($c1);
+        $player->add($card1);
+        $player->add($card1);
         $this->assertEquals($player->getSum(), 12);
-        $player->add($c2);
-        $player->add($c2);
-        $player->add($c1);
+        $player->add($card2);
+        $player->add($card2);
+        $player->add($card1);
         $this->assertEquals($player->getSum(), 23);
-
     }
 }

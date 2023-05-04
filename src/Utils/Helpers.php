@@ -16,12 +16,14 @@ class Helpers
         if ($session->has("usedCards")) {
             $used = $session->get("usedCards");
             $cardArr = [];
-            foreach ($used as $card) {
-                $tCard = new CardGraphic();
-                $tCard->setValue($card["value"]);
-                $tCard->setType($card["type"]);
-                $tCard->setStyle();
-                $cardArr[] = $tCard;
+            if (is_array($used)){
+                foreach ($used as $card) {
+                    $tCard = new CardGraphic();
+                    $tCard->setValue($card["value"]);
+                    $tCard->setType($card["type"]);
+                    $tCard->setStyle();
+                    $cardArr[] = $tCard;
+                }
             }
             $deck->recreateDeck($cardArr);
             return $deck;
@@ -30,12 +32,16 @@ class Helpers
 
         return $deck;
     }
-
-    public static function saveToSession(SessionInterface $session, array $thisTurn)
+    /**
+    * @param array<mixed> $thisTurn
+    */
+    public static function saveToSession(SessionInterface $session, array $thisTurn) : string
     {
         $drawnCards = $session->get("usedCards");
+        $hand = new BlackjackHand();
         if ($session->has("usedCards")) {
-            $allUsed = array_merge($drawnCards, $thisTurn);
+            $hand->setHand($drawnCards);
+            $allUsed = $hand->mergeCards($thisTurn);
             $session->set("usedCards", $allUsed);
             return "session exists";
         }
@@ -50,12 +56,14 @@ class Helpers
         if ($session->has("blackjackDeck")) {
             $used = $session->get("blackjackDeck");
             $cardArr = [];
-            foreach ($used as $card) {
-                $tCard = new CardGraphic();
-                $tCard->setValue($card["value"]);
-                $tCard->setType($card["type"]);
-                $tCard->setStyle();
-                $cardArr[] = $tCard;
+            if (is_array($used)){
+                foreach ($used as $card) {
+                    $tCard = new CardGraphic();
+                    $tCard->setValue($card["value"]);
+                    $tCard->setType($card["type"]);
+                    $tCard->setStyle();
+                    $cardArr[] = $tCard;
+                }
             }
             $deck->recreateDeck($cardArr);
             return $deck;
@@ -64,11 +72,16 @@ class Helpers
 
         return $deck;
     }
-    public static function saveBlackjackDeckToSession(SessionInterface $session, array $thisTurn)
+    /**
+    * @param array<mixed> $thisTurn
+    */
+    public static function saveBlackjackDeckToSession(SessionInterface $session, array $thisTurn) : string
     {
         $drawnCards = $session->get("blackjackDeck");
+        $hand = new BlackjackHand();
         if ($session->has("blackjackDeck")) {
-            $allUsed = array_merge($drawnCards, $thisTurn);
+            $hand->setHand($drawnCards);
+            $allUsed = $hand->mergeCards($thisTurn);
             $session->set("blackjackDeck", $allUsed);
             return "session exists";
         }
@@ -77,27 +90,35 @@ class Helpers
 
     }
 
-    public static function getPlayerHand(SessionInterface $session)
+    public static function getPlayerHand(SessionInterface $session) : BlackjackHand
     {
         $hand = new BlackjackHand();
         if ($session->has("blackjackHand")) {
             $used = $session->get("blackjackHand");
-            foreach ($used as $card) {
-                $tCard = new CardGraphic();
-                $tCard->setValue($card["value"]);
-                $tCard->setType($card["type"]);
-                $tCard->setStyle();
-                $hand->add($tCard);
+            if (is_array($used)) {
+                foreach ($used as $card) {
+                    if (is_array($card) && array_key_exists('value', $card) && array_key_exists('type', $card)) {
+                        $tCard = new CardGraphic();
+                        $tCard->setValue($card["value"]);
+                        $tCard->setType($card["type"]);
+                        $tCard->setStyle();
+                        $hand->add($tCard);
+                    }
+                }
             }
         }
         return $hand;
     }
-
-    public static function savePlayerHand(SessionInterface $session, array $thisTurn)
+    /**
+    * @param array<mixed> $thisTurn
+    */
+    public static function savePlayerHand(SessionInterface $session, array $thisTurn) : string
     {
         $drawnCards = $session->get("blackjackHand");
+        $hand = new BlackjackHand();
         if ($session->has("blackjackHand")) {
-            $allUsed = array_merge($drawnCards, $thisTurn);
+            $hand->setHand($drawnCards);
+            $allUsed = $hand->mergeCards($thisTurn);
             $session->set("blackjackHand", $allUsed);
             return "session exists";
         }
@@ -105,27 +126,35 @@ class Helpers
         return "session created";
     }
 
-    public static function getBankHand(SessionInterface $session)
+    public static function getBankHand(SessionInterface $session) : BlackjackHand
     {
         $hand = new BlackjackHand();
         if ($session->has("bankHand")) {
             $used = $session->get("bankHand");
-            foreach ($used as $card) {
-                $tCard = new CardGraphic();
-                $tCard->setValue($card["value"]);
-                $tCard->setType($card["type"]);
-                $tCard->setStyle();
-                $hand->add($tCard);
+            if (is_array($used)) {
+                foreach ($used as $card) {
+                    if (is_array($card) && array_key_exists('value', $card) && array_key_exists('type', $card)) {
+                        $tCard = new CardGraphic();
+                        $tCard->setValue($card["value"]);
+                        $tCard->setType($card["type"]);
+                        $tCard->setStyle();
+                        $hand->add($tCard);
+                    }
+                }
             }
         }
         return $hand;
     }
-
-    public static function saveBankHand(SessionInterface $session, array $thisTurn)
-    {
+    /**
+    * @param array<mixed> $thisTurn
+    */
+    public static function saveBankHand(SessionInterface $session, array $thisTurn) : string
+    {   
         $drawnCards = $session->get("bankHand");
+        $hand = new BlackjackHand();
         if ($session->has("bankHand")) {
-            $allUsed = array_merge($drawnCards, $thisTurn);
+            $hand->setHand($drawnCards);
+            $allUsed = $hand->mergeCards($thisTurn);
             $session->set("bankHand", $allUsed);
             return "session exists";
         }

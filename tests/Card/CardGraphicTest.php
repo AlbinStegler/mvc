@@ -9,13 +9,13 @@ use PHPUnit\Framework\TestCase;
  */
 class CardGraphicTest extends TestCase
 {
-    public function testCreateCardGraphic()
+    public function testCreateCardGraphic() : void
     {
         $card = new CardGraphic();
         $this->assertInstanceOf("\App\Card\CardGraphic", $card);
     }
 
-    public function testSetStyle()
+    public function testSetStyle() : void
     {
         $card = new CardGraphic();
         $val = $card->getImgPath();
@@ -31,7 +31,7 @@ class CardGraphicTest extends TestCase
         $this->assertEquals($val, "img/cards/kings/king_of_Spades.svg");
     }
 
-    public function testShowCard()
+    public function testShowCard() : void
     {
         $card = new CardGraphic();
         $val = $card->showCard();

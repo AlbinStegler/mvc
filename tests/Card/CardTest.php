@@ -9,14 +9,14 @@ use PHPUnit\Framework\TestCase;
  */
 class CardTest extends TestCase
 {
-    public function testCreateCard()
+    public function testCreateCard() : void
     {
         $card = new Card();
         $this->assertInstanceOf("\App\Card\Card", $card);
 
     }
 
-    public function testSetValue()
+    public function testSetValue() : void
     {
         $card = new Card();
         $val = $card->getValue();
@@ -26,7 +26,7 @@ class CardTest extends TestCase
         $this->assertEquals($val, 3);
     }
 
-    public function testSetType()
+    public function testSetType() : void
     {
         $card = new Card();
         $val = $card->getType();
@@ -36,7 +36,7 @@ class CardTest extends TestCase
         $this->assertEquals($val, "Spades");
     }
 
-    public function testShowCard()
+    public function testShowCard() : void
     {
         $card = new Card();
         $val = $card->showCard();
