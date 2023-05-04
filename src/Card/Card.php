@@ -4,21 +4,27 @@ namespace App\Card;
 
 class Card
 {
+    /**
+     *  @var int $value
+     */
     protected $value; //14
+    /**
+     *  @var string $type
+     */
     protected $type; //Spades
 
     public function __construct()
     {
-        $this->value = null;
-        $this->type = null;
+        $this->value = 0;
+        $this->type = "";
     }
 
-    public function setValue($newValue)
+    public function setValue(int $newValue) : void
     {
         $this->value = $newValue;
     }
 
-    public function setType($newType)
+    public function setType(string $newType) : void
     {
         $this->type = $newType;
     }
@@ -32,12 +38,9 @@ class Card
     {
         return $this->type;
     }
-
-    // public function toArr(): array
-    // {
-    //     return ["type" => $this->type, "value" => $this->value];
-    // }
-
+    /**
+     * @return array{"value": mixed, "type": mixed}
+     */
     public function showCard(): array
     {
         $deck = [

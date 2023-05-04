@@ -11,9 +11,9 @@ class CardHand
 {
     /**
      * Cards that the "hand" holds
-     * @var array<Cardgraphic> $cards
+     * @var array<CardGraphic> $cards
      */
-    protected $cards= [];
+    protected $cards;
 
     public function __construct()
     {
@@ -39,12 +39,15 @@ class CardHand
     }
     /**
      * Gets cards values in a array
-     * @return array<array{value: mixed, type: mixed, style: mixed}> $arr
      */
-    public function getCards(): array
+
+     /**
+      * @return array<array> | array $arr
+      */
+    public function getCards(): mixed
     {
         $arr = [];
-        if ($this->cards != null) {
+        if (!empty($this->cards)) {
             foreach ($this->cards as $card) {
                 $arr[] = $card->showCard();
             }

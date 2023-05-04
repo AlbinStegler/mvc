@@ -4,6 +4,9 @@ namespace App\Card;
 
 class CardGraphic extends Card
 {
+    /**
+     * @var string | null $imgPath
+     */
     protected $imgPath = null;
 
     public function __construct()
@@ -19,7 +22,7 @@ class CardGraphic extends Card
 
         return $convertion[$value];
     }
-    public function setStyle()
+    public function setStyle() : void
     {
         $folder = $this->nrToText($this->value);
         if ($this->value > 10) {
@@ -29,7 +32,9 @@ class CardGraphic extends Card
             $this->imgPath = "img/cards/" . $folder . "/" . $this->value . "_of_" .$this->type . ".svg";
         }
     }
-
+    /**
+     * @return string | null
+     */
     public function getImgPath()
     {
         return $this->imgPath;
