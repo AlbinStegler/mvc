@@ -17,14 +17,6 @@ class BankTest extends TestCase
         $this->assertInstanceOf("\App\Game\Bank", $bank);
     }
 
-    private function createCardGraphic(int $value, string $type) : CardGraphic {
-        $c1 = new CardGraphic();
-        $c1->setValue($value);
-        $c1->setType($type);
-        $c1->setStyle();
-        return $c1;
-    }
-
     public function testCanIDraw() {
         $cardHand = new BlackjackHand();
         $this->assertEquals($cardHand->getCards(), []);

@@ -19,6 +19,14 @@ class CardHand
         $this->cards[] = $card;
     }
 
+    public function removeCard(CardGraphic $cardToRemove)
+    {
+        $key = array_search($cardToRemove, $this->cards);
+        if ($key !== false) {
+            unset($this->cards[$key]);
+        }
+    }
+
     public function getCards(): array
     {
         $arr = [];

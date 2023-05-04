@@ -33,4 +33,16 @@ class CardHandTest extends TestCase
         }
 
     }
+
+    public function testGetSum() {
+        $cardHand = new CardHand();
+        for ($i = 4; $i < 10; $i++) {
+            $card = new CardGraphic();
+            $card->setType("Spades");
+            $card->setValue($i);
+            $card->setStyle();
+            $cardHand->add($card);
+        }
+        $this->assertEquals($cardHand->getSum(), 39);
+    }
 }
