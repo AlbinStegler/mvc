@@ -9,12 +9,14 @@ use PHPUnit\Framework\TestCase;
  */
 class CardHandTest extends TestCase
 {
-    public function testCreateCardGraphic() {
+    public function testCreateCardGraphic()
+    {
         $card = new CardHand();
         $this->assertInstanceOf("\App\Card\CardHand", $card);
     }
 
-    public function testAddCards() {
+    public function testAddCards()
+    {
         $cardHand = new CardHand();
         $this->assertEquals($cardHand->getCards(), []);
         for ($i = 4; $i < 10; $i++) {
@@ -27,14 +29,15 @@ class CardHandTest extends TestCase
         $vals = $cardHand->getCards();
 
         foreach ($vals as $val) {
-            $this->assertArrayHasKey("value" , $val);
-            $this->assertArrayHasKey("type" , $val);
+            $this->assertArrayHasKey("value", $val);
+            $this->assertArrayHasKey("type", $val);
             $this->assertArrayHasKey("style", $val);
         }
 
     }
 
-    public function testGetSum() {
+    public function testGetSum()
+    {
         $cardHand = new CardHand();
         for ($i = 4; $i < 10; $i++) {
             $card = new CardGraphic();

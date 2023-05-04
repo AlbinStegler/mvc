@@ -9,12 +9,14 @@ use PHPUnit\Framework\TestCase;
  */
 class DeckOfCardsTest extends TestCase
 {
-    public function testCreateDeckOfCards() {
+    public function testCreateDeckOfCards()
+    {
         $card = new DeckOfCards();
         $this->assertInstanceOf("\App\Card\DeckOfCards", $card);
-    }    
+    }
 
-    public function testSetupDeck() {
+    public function testSetupDeck()
+    {
         $card = new DeckOfCards();
         $card->setupDeck();
 
@@ -34,25 +36,25 @@ class DeckOfCardsTest extends TestCase
 
             $this->assertContains($colors[$times1], $c);
             $this->assertEquals($values[$times2], $c["value"]);
-            
+
             if ($times1 < 3) {
                 $times1++;
-            } 
-            elseif ($times1 >= 3) {
+            } elseif ($times1 >= 3) {
                 $times1 = 0;
                 $times2++;
             }
         }
     }
 
-    public function testRecreateDeck() {
+    public function testRecreateDeck()
+    {
         $card = new DeckOfCards();
         $card->setupDeck();
         $cardToRemove = new CardGraphic();
         $cardToRemove->setValue(8);
         $cardToRemove->setType("diamonds");
         $cardToRemove->setStyle();
-        
+
         $card->removeCard($cardToRemove);
 
         $this->assertFalse(array_search($cardToRemove->showCard(), $card->showDeck()));
@@ -63,7 +65,8 @@ class DeckOfCardsTest extends TestCase
         $this->assertTrue($deck2->equal($card));
     }
 
-    public function testShuffleDeck() {
+    public function testShuffleDeck()
+    {
         $card1 = new DeckOfCards();
         $card1->setupDeck();
         $card1->shuffleDeck();
@@ -72,13 +75,14 @@ class DeckOfCardsTest extends TestCase
         $this->assertFalse($card1->equal($card2));
     }
 
-    public function testDrawCard() {
+    public function testDrawCard()
+    {
         $card1 = new DeckOfCards();
         $card1->setupDeck();
         $card1->shuffleDeck();
         $arr = $card1->showDeck();
         $card = array_shift($arr);
-        
+
         $this->assertEquals($card, $card1->drawCard()->showCard());
     }
 }

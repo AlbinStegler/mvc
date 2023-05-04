@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Game;
+
 use App\Card\BlackjackHand;
 use App\Card\CardGraphic;
 
@@ -11,13 +12,15 @@ use PHPUnit\Framework\TestCase;
  */
 class BankTest extends TestCase
 {
-    public function testCreateBank() {
+    public function testCreateBank()
+    {
         $hand = new BlackjackHand();
         $bank = new Bank($hand);
         $this->assertInstanceOf("\App\Game\Bank", $bank);
     }
 
-    public function testCanIDraw() {
+    public function testCanIDraw()
+    {
         $cardHand = new BlackjackHand();
         $this->assertEquals($cardHand->getCards(), []);
         for ($i = 4; $i < 10; $i++) {

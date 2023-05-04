@@ -95,17 +95,18 @@ class DeckOfCards
         return $deck;
     }
 
-    public function equal(DeckOfCards $other) : bool {
+    public function equal(DeckOfCards $other): bool
+    {
 
-        if ($other->getDeckSize() == $this->getDeckSize()){
+        if ($other->getDeckSize() == $this->getDeckSize()) {
             $deck1 = $other->showDeck();
             $deck2 = $this->showDeck();
-            for ($i = 0; $i < $other->getDeckSize() - 1; $i++){
-                if ($deck1[$i] != $deck2[$i]){
+            for ($i = 0; $i < $other->getDeckSize() - 1; $i++) {
+                if ($deck1[$i] != $deck2[$i]) {
                     return false;
                 }
             }
         }
-        return True;
+        return true;
     }
 }

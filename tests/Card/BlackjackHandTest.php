@@ -9,12 +9,14 @@ use PHPUnit\Framework\TestCase;
  */
 class BlackjackHandTest extends TestCase
 {
-    public function testCreateBlackjackHand() {
+    public function testCreateBlackjackHand()
+    {
         $bHand = new BlackjackHand();
         $this->assertInstanceOf("\App\Card\BlackjackHand", $bHand);
     }
 
-    private function createCardGraphic(int $value, string $type) : CardGraphic{
+    private function createCardGraphic(int $value, string $type): CardGraphic
+    {
         $c1 = new CardGraphic();
         $c1->setValue($value);
         $c1->setType($type);
@@ -22,13 +24,14 @@ class BlackjackHandTest extends TestCase
         return $c1;
     }
 
-    public function testPlayerWon() {
+    public function testPlayerWon()
+    {
         $player = new BlackjackHand();
         $bank = new BlackjackHand();
 
         $c1 = $this->createCardGraphic(10, "Spades");
         $c2 = $this->createCardGraphic(10, "Diamonds");
-        
+
         $player->add($c1);
         $player->add($c2);
 
@@ -47,8 +50,9 @@ class BlackjackHandTest extends TestCase
         $this->assertTrue($player->playerWon($player, $bank2));
     }
 
-    public function testLowerPoints() {
-        $player = new BlackjackHand;
+    public function testLowerPoints()
+    {
+        $player = new BlackjackHand();
         $c1 = $this->createCardGraphic(14, "Spades");
         $c2 = $this->createCardGraphic(12, "Diamonds");
         $c3 = $this->createCardGraphic(8, "Diamonds");

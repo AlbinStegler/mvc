@@ -4,21 +4,31 @@ namespace App\Card;
 
 use App\Card\CardGraphic;
 
+/**
+ * Class created to represent a normal cardhand where aces are worth 14
+ */
 class CardHand
 {
+    /**
+     * Cards that the "hand" holds
+     */
     protected $cards= [];
 
     public function __construct()
     {
         $this->cards = [];
     }
-
+    /**
+     * Adds a card to the hand
+     */
     public function add(CardGraphic $card)
     {
         $card->setStyle();
         $this->cards[] = $card;
     }
-
+    /**
+     * Removes the card from the hand
+     */
     public function removeCard(CardGraphic $cardToRemove)
     {
         $key = array_search($cardToRemove, $this->cards);
@@ -26,7 +36,9 @@ class CardHand
             unset($this->cards[$key]);
         }
     }
-
+    /**
+     * Gets cards values in a array
+     */
     public function getCards(): array
     {
         $arr = [];
@@ -37,7 +49,9 @@ class CardHand
         }
         return $arr;
     }
-
+    /**
+     * Returns the sum of all the cards in the hand
+     */
     public function getSum(): int
     {
         $sum = 0;

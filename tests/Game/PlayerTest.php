@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Game;
+
 use App\Card\BlackjackHand;
 use App\Card\CardGraphic;
 
@@ -11,23 +12,26 @@ use PHPUnit\Framework\TestCase;
  */
 class PlayerTest extends TestCase
 {
-    public function testCreatePlayer() {
+    public function testCreatePlayer()
+    {
         $hand = new BlackjackHand();
         $player = new Player($hand);
         $this->assertInstanceOf("\App\Game\Player", $player);
     }
 
-    public function testDraw() {
+    public function testDraw()
+    {
         $cardHand = new BlackjackHand();
         $this->assertEquals($cardHand->getCards(), []);
-        
+
         $sum = $cardHand->getSum();
         $player = new Player($cardHand);
         $this->assertTrue($player->canIDraw($sum));
         $this->assertFalse($player->canIDraw(21));
     }
-    
-    private function createCardGraphic(int $value, string $type) : CardGraphic {
+
+    private function createCardGraphic(int $value, string $type): CardGraphic
+    {
         $c1 = new CardGraphic();
         $c1->setValue($value);
         $c1->setType($type);
@@ -35,7 +39,8 @@ class PlayerTest extends TestCase
         return $c1;
     }
 
-    public function testPlayerWon() {
+    public function testPlayerWon()
+    {
         $blackjack = new BlackjackHand();
         $ten = $this->createCardGraphic(10, "Diamonds");
         $ace = $this->createCardGraphic(14, "Diamonds");
@@ -53,7 +58,7 @@ class PlayerTest extends TestCase
 
         $blackjack->removeCard($ace);
         $blackjack->add($ten);
-        
+
         $bank->removeCard($ace);
         $bank->add($ten);
         //Spelare förlorat
