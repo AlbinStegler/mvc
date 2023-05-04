@@ -64,4 +64,35 @@ class BlackjackHandTest extends TestCase
         $player->add($card1);
         $this->assertEquals($player->getSum(), 23);
     }
+
+    public function testGetHand() : void {
+        $player = new BlackjackHand();
+        $card1 = $this->createCardGraphic(14, "Spades");
+        $card2 = $this->createCardGraphic(12, "Diamonds");
+
+        $player->add($card1);
+        $player->add($card2);
+        
+        $hand = $player->getHand();
+
+        $copy = [$card1, $card2];
+
+        $this->assertEquals($hand, $copy);
+    }
+
+    public function testMerge() : void {
+        $player = new BlackjackHand();
+        $player2 = new BlackjackHand();
+
+        $card1 = $this->createCardGraphic(14, "Spades");
+        $card2 = $this->createCardGraphic(12, "Diamonds");
+
+        $player->add($card1);
+        $player->add($card2);
+
+        $cards = [$card1, $card2];
+
+        $player2->mergeCards($cards);
+        $this->assertEquals($player2, $player);
+    }
 }

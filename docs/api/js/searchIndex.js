@@ -26,6 +26,21 @@ Search.appendIndex(
             "summary": "Calculates\u0020the\u0020sum\u0020of\u0020the\u0020hands\u0020with\u0020the\u0020rules\u0020of\u0020blackjack.\u0020Clothed\u0020cards\u0020are\u002010\u0020and\u0020ace\u0020is\u0020either\u00201\u0020or\u002011",
             "url": "classes/App-Card-BlackjackHand.html#method_getSum"
         },                {
+            "fqsen": "\\App\\Card\\BlackjackHand\u003A\u003AgetHand\u0028\u0029",
+            "name": "getHand",
+            "summary": "",
+            "url": "classes/App-Card-BlackjackHand.html#method_getHand"
+        },                {
+            "fqsen": "\\App\\Card\\BlackjackHand\u003A\u003AsetHand\u0028\u0029",
+            "name": "setHand",
+            "summary": "",
+            "url": "classes/App-Card-BlackjackHand.html#method_setHand"
+        },                {
+            "fqsen": "\\App\\Card\\BlackjackHand\u003A\u003AmergeCards\u0028\u0029",
+            "name": "mergeCards",
+            "summary": "",
+            "url": "classes/App-Card-BlackjackHand.html#method_mergeCards"
+        },                {
             "fqsen": "\\App\\Card\\Card",
             "name": "Card",
             "summary": "",
@@ -128,7 +143,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003AgetCards\u0028\u0029",
             "name": "getCards",
-            "summary": "Gets\u0020cards\u0020values\u0020in\u0020a\u0020array",
+            "summary": "Gets\u0020cards\u0020values\u0020in\u0020an\u0020array\u0020of\u0020associative\u0020arrays.",
             "url": "classes/App-Card-CardHand.html#method_getCards"
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003AgetSum\u0028\u0029",
