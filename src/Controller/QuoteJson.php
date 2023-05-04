@@ -67,6 +67,10 @@ class QuoteJson extends AbstractController
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
+
+        /**
+         * @var CardGraphic $drawn
+        */
         $helper->saveToSession($session, [$drawn]);
         return $response;
     }
@@ -86,7 +90,9 @@ class QuoteJson extends AbstractController
                 $thisTurn[] = $deck->drawCard()->showCard();
             }
         }
-
+        /**
+         * @var array<CardGraphic> $thisTurn
+        */
         $helper->saveToSession($session, $thisTurn);
         $data = ["kort" => $thisTurn, "antal" => $deck->getDeckSize()];
 

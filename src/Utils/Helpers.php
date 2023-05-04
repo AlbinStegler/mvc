@@ -33,13 +33,16 @@ class Helpers
         return $deck;
     }
     /**
-    * @param array<mixed> $thisTurn
+    * @param array<CardGraphic> $thisTurn
     */
     public static function saveToSession(SessionInterface $session, array $thisTurn) : string
     {
         $drawnCards = $session->get("usedCards");
         $hand = new BlackjackHand();
         if ($session->has("usedCards")) {
+            /**
+             * @var array<CardGraphic> $drawnCards
+             */
             $hand->setHand($drawnCards);
             $allUsed = $hand->mergeCards($thisTurn);
             $session->set("usedCards", $allUsed);
@@ -73,13 +76,16 @@ class Helpers
         return $deck;
     }
     /**
-    * @param array<mixed> $thisTurn
+    * @param array<CardGraphic> $thisTurn
     */
     public static function saveBlackjackDeckToSession(SessionInterface $session, array $thisTurn) : string
     {
         $drawnCards = $session->get("blackjackDeck");
         $hand = new BlackjackHand();
         if ($session->has("blackjackDeck")) {
+            /**
+             * @var array<CardGraphic> $drawnCards
+             */
             $hand->setHand($drawnCards);
             $allUsed = $hand->mergeCards($thisTurn);
             $session->set("blackjackDeck", $allUsed);
@@ -110,13 +116,16 @@ class Helpers
         return $hand;
     }
     /**
-    * @param array<mixed> $thisTurn
+    * @param array<CardGraphic> $thisTurn
     */
     public static function savePlayerHand(SessionInterface $session, array $thisTurn) : string
     {
         $drawnCards = $session->get("blackjackHand");
         $hand = new BlackjackHand();
         if ($session->has("blackjackHand")) {
+            /**
+             * @var array<CardGraphic> $drawnCards
+             */
             $hand->setHand($drawnCards);
             $allUsed = $hand->mergeCards($thisTurn);
             $session->set("blackjackHand", $allUsed);
@@ -146,12 +155,15 @@ class Helpers
         return $hand;
     }
     /**
-    * @param array<mixed> $thisTurn
+    * @param array<CardGraphic> $thisTurn
     */
     public static function saveBankHand(SessionInterface $session, array $thisTurn) : string
     {   
         $drawnCards = $session->get("bankHand");
         $hand = new BlackjackHand();
+        /**
+         * @var array<CardGraphic> $drawnCards
+         */
         if ($session->has("bankHand")) {
             $hand->setHand($drawnCards);
             $allUsed = $hand->mergeCards($thisTurn);

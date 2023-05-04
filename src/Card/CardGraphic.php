@@ -39,7 +39,9 @@ class CardGraphic extends Card
     {
         return $this->imgPath;
     }
-
+    /**
+     * @return array{"value": mixed, "type": mixed, "style": mixed}
+     */
     public function showCard(): array
     {
         $deck = [

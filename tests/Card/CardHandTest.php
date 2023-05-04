@@ -15,6 +15,7 @@ class CardHandTest extends TestCase
         $this->assertInstanceOf("\App\Card\CardHand", $card);
     }
 
+   
     public function testAddCards() : void
     {
         $cardHand = new CardHand();
@@ -26,8 +27,11 @@ class CardHandTest extends TestCase
             $card->setStyle();
             $cardHand->add($card);
         }
+        
         $vals = $cardHand->getCards();
-
+        /**
+        * @var array{"value": mixed, "type": mixed, "style": mixed} $val
+        */
         foreach ($vals as $val) {
             $this->assertArrayHasKey("value", $val);
             $this->assertArrayHasKey("type", $val);

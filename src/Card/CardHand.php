@@ -38,13 +38,11 @@ class CardHand
         }
     }
     /**
-     * Gets cards values in a array
-     */
-
-     /**
-      * @return array<array> | array $arr
-      */
-    public function getCards(): mixed
+    * Gets cards values in an array of associative arrays.
+    *
+    * @return array<mixed> $arr
+    */
+    public function getCards() : mixed
     {
         $arr = [];
         if (!empty($this->cards)) {

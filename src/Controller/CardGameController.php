@@ -88,9 +88,12 @@ class CardGameController extends AbstractController
         $hand->add($drawn);
 
         //Sparar draget kort till session och redirectar till startsida
-
-        $helper->savePlayerHand($session, [$drawn->showCard()]);
-        $helper->saveBlackjackDeckToSession($session, [$drawn->showCard()]);
+        /**
+         * @var array<CardGraphic> $card2Show
+        */
+        $card2Show = [$drawn->showCard()];
+        $helper->savePlayerHand($session, $card2Show);
+        $helper->saveBlackjackDeckToSession($session, $card2Show);
         return $this->redirectToRoute('start');
     }
 
@@ -123,8 +126,15 @@ class CardGameController extends AbstractController
         }
 
         //Sparar till session
+        /**
+         * @var array<CardGraphic> $allDrawn
+        */
         $helper->saveBankHand($session, $allDrawn);
-        $helper->saveBlackjackDeckToSession($session, [$drawn->showCard()]);
+        /**
+         * @var array<CardGraphic> $card2Show
+        */
+        $card2Show = [$drawn->showCard()];
+        $helper->saveBlackjackDeckToSession($session, $card2Show);
         return $this->redirectToRoute('start');
     }
 }
