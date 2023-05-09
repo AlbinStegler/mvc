@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\Book;
 use App\Repository\BookRepository;
@@ -19,11 +20,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class QuoteJson extends AbstractController
 {
     #[Route("/api", name: "landing-Json")]
-    public function jsonStart(): Response
+    public function jsonStart(BookRepository $bookRepository): Response
     {
+        $all["books"] = $bookRepository->findAll();
 
-
-        return $this->render('json/json.html.twig');;
+        return $this->render('json/json.html.twig', $all);;
     }
 
     #[Route("/api/deck", name: "deck-Json", methods: ['GET'])]
@@ -172,5 +173,28 @@ class QuoteJson extends AbstractController
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
         return $response;
+    }
+
+    #[Route('/api/show/{id}', name: 'book_by_id_api')]
+    public function showProductById(
+        BookRepository $bookRepository,
+        int $id
+    ): Response {
+        $book = $bookRepository
+            ->find($id);
+
+        $response = $this->json($book);
+
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+
+    #[Route("/api/showbook", name: "showbook", methods: ["POST"])]
+    public function showOne(BookRepository $bookRepository, Request $request): Response
+    {
+        $id = ($request->request->get("id"));
+        return $this->redirectToRoute('book_by_id_api', ["id" => (int)$id]);
     }
 }

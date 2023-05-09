@@ -12,6 +12,10 @@
     background-color: rgba(0, 0, 0, 0.377);
 }
 
+.book:hover {
+    background-color: rgba(139, 139, 139, 0.651);
+}
+
 .book-large {
     a {
         padding: 0;
@@ -35,6 +39,7 @@
     background-color: rgba(0, 0, 0, 0.377);
     text-decoration: none;
 }
+
 
 .book-two-col {
     display: flex;

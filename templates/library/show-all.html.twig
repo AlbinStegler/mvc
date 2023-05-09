@@ -5,8 +5,8 @@
 {% block main %}
     
     {% for c in books %}
-    <a href="show/{{c.id}}">
     <div class="book">
+    <a class="show-one" href="show/{{c.id}}">
         <h2>{{c.title}}</h2>
         <div class="book-two-col">
             <p>ISBN: {{c.isbn}}</p>
@@ -18,8 +18,8 @@
         <a class="button" href='delete/{{c.id}}'>Ta bort Bok</a>
         <a class="button" href='update/{{c.id}}'>Uppdatera bok</a>
 
-    </div>
     </a>
+    </div>
     {% endfor %}
 
 

@@ -32,4 +32,14 @@
     >
     </p>
 </form>
+<form method="POST" action="{{ path('showbook') }}">
+    <h2>Visa bok</h2>
+    <select name="id">
+        {% for a in books %}
+            <option value="{{a.id}}" >{{a.id}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" name="books" value="Visa böcker">
+</form>
+
 {% endblock %}

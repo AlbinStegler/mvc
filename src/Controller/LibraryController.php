@@ -55,6 +55,8 @@ class LibraryController extends AbstractController
         return $this->render('library/show-all.html.twig', $all);
     }
 
+
+
     #[Route('/library/show/{id}', name: 'book_by_id')]
     public function showProductById(
         BookRepository $bookRepository,
