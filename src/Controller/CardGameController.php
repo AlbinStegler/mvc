@@ -36,7 +36,6 @@ class CardGameController extends AbstractController
         //Korten hämtas från session
         $hand = $helper->getPlayerHand($session);
         $bankHand = $helper->getBankHand($session);
-        dump($bankHand);
         $player = new Player($hand);
 
         $playerLost = false;

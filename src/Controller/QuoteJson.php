@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+
+
+use App\Entity\Book;
+use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +23,7 @@ class QuoteJson extends AbstractController
     {
 
 
-        return $this->render('json/json.html.twig');
-        ;
+        return $this->render('json/json.html.twig');;
     }
 
     #[Route("/api/deck", name: "deck-Json", methods: ['GET'])]
@@ -60,8 +63,10 @@ class QuoteJson extends AbstractController
         $deck = $helper->createDeckFromSession($session);
         $deck->shuffleDeck();
         $drawn = $deck->drawCard()->showCard();
-        $data = ["draget-kort" => $drawn,
-                "antal-kvar" => $deck->getDeckSize()];
+        $data = [
+            "draget-kort" => $drawn,
+            "antal-kvar" => $deck->getDeckSize()
+        ];
         $response = new JsonResponse($data);
 
         $response->setEncodingOptions(
@@ -70,7 +75,7 @@ class QuoteJson extends AbstractController
 
         /**
          * @var CardGraphic $drawn
-        */
+         */
         $helper->saveToSession($session, [$drawn]);
         return $response;
     }
@@ -92,7 +97,7 @@ class QuoteJson extends AbstractController
         }
         /**
          * @var array<CardGraphic> $thisTurn
-        */
+         */
         $helper->saveToSession($session, $thisTurn);
         $data = ["kort" => $thisTurn, "antal" => $deck->getDeckSize()];
 
@@ -119,10 +124,11 @@ class QuoteJson extends AbstractController
             "If it was easy, everyone would do it",
             "Good decisions come from experience. Experience comes from making bad decisions",
         ];
-        $data = [ "quote" => $quotes[$number],
-                "date" => $date,
-                "time" => $time
-            ];
+        $data = [
+            "quote" => $quotes[$number],
+            "date" => $date,
+            "time" => $time
+        ];
         $response = new JsonResponse($data);
 
         $response->setEncodingOptions(
@@ -148,6 +154,19 @@ class QuoteJson extends AbstractController
         $data = ["bank" => $bank->getCards(), "spelare" => $player->getCards(), "deck" => $deck->showDeck()];
 
         $response = new JsonResponse($data);
+
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+
+    #[Route("/api/library/books", name: "showallApi")]
+    public function showAllBooks(BookRepository $bookRepository): Response
+    {
+        $all = $bookRepository->findAll();
+
+        $response = $this->json($all);
 
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT

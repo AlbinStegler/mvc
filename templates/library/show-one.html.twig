@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Alla böcker{% endblock %}
+
+{% block main %}
+    
+    <div class="book-large">
+        <h2>{{book.title}}</h2>
+        <div class="book-two-col">
+            <p>ISBN: {{book.isbn}}</p>
+            <p>Author: {{book.author}}</p>
+        </div>
+        {% if (book.img) %}
+            <img src="{{book.img}}" alt="bild på bok">
+        {% endif %}
+    </div>
+
+
+{% endblock %}

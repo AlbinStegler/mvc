@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Biblotek{% endblock %}
+
+{% block main %}
+    <h1>Uppdatera bok</h1>
+    <form action="{{ path('updatePost') }}" method="POST">
+        <label>Title</label>
+        <input type="text" name="title" value="{{book.title}}" required="required">
+        <label>ISBN</label>
+        <input type="number" name="isbn" value="{{book.isbn}}" required="required">
+        <label>Author</label>
+        <input type="text" name="author" value="{{book.author}}" required="required">
+        <label>Img</label>
+        <input type="text" value="{{book.img}}" name="img">
+        <input type="hidden" value="{{book.id}}" name="id">
+        <input type="submit">
+    </form>
+
+{% endblock %}
