@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class QuoteJson extends AbstractController
 {
+    // Landingpage 
     #[Route("/api", name: "landing-Json")]
     public function jsonStart(BookRepository $bookRepository): Response
     {
