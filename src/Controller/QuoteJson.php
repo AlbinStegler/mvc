@@ -193,7 +193,7 @@ class QuoteJson extends AbstractController
         );
         return $response;
     }
-
+    // Post route for showing one book redirects to book_by_id_api
     #[Route("/api/showbook", name: "showbook", methods: ["POST"])]
     public function showOne(Request $request): Response
     {
