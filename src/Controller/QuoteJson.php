@@ -22,9 +22,10 @@ class QuoteJson extends AbstractController
     #[Route("/api", name: "landing-Json")]
     public function jsonStart(BookRepository $bookRepository): Response
     {
-        $all["books"] = $bookRepository->findAll();
+        $allbooks = [];
+        $allbooks["books"] = $bookRepository->findAll();
 
-        return $this->render('json/json.html.twig', $all);;
+        return $this->render('json/json.html.twig', $allbooks);;
     }
 
     #[Route("/api/deck", name: "deck-Json", methods: ['GET'])]
@@ -175,13 +176,13 @@ class QuoteJson extends AbstractController
         return $response;
     }
 
-    #[Route('/api/show/{id}', name: 'book_by_id_api')]
+    #[Route('/api/show/{bookid}', name: 'book_by_id_api')]
     public function showProductById(
         BookRepository $bookRepository,
-        int $id
+        int $bookid
     ): Response {
         $book = $bookRepository
-            ->find($id);
+            ->find($bookid);
 
         $response = $this->json($book);
 
@@ -192,9 +193,9 @@ class QuoteJson extends AbstractController
     }
 
     #[Route("/api/showbook", name: "showbook", methods: ["POST"])]
-    public function showOne(BookRepository $bookRepository, Request $request): Response
+    public function showOne(Request $request): Response
     {
-        $id = ($request->request->get("id"));
-        return $this->redirectToRoute('book_by_id_api', ["id" => (int)$id]);
+        $bookId = ($request->request->get("id"));
+        return $this->redirectToRoute('book_by_id_api', ["bookid" => (int)$bookId]);
     }
 }

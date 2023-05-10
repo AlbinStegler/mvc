@@ -36,7 +36,7 @@
     <h2>Visa bok</h2>
     <select name="id">
         {% for a in books %}
-            <option value="{{a.id}}" >{{a.id}}</option>
+            <option value="{{a.id}}" >{{a.title}}</option>
         {% endfor %}
     </select>
     <input type="submit" name="books" value="Visa böcker">

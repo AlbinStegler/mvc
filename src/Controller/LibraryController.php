@@ -97,12 +97,6 @@ class LibraryController extends AbstractController
         $book["book"] = $bookRepository
             ->find((int)$id);
 
-        if (!$book) {
-            throw $this->createNotFoundException(
-                'No book found for id ' . $id
-            );
-        }
-
         return $this->render('library/update.html.twig', $book);
     }
 
@@ -114,6 +108,9 @@ class LibraryController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         $entityManager = $doctrine->getManager();
+        /**
+         * @var Book $book
+         */
         $book = $entityManager->getRepository(Book::class)->find((int)$data["id"]);
 
 
