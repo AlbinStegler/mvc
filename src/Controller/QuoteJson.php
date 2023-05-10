@@ -176,6 +176,7 @@ class QuoteJson extends AbstractController
         return $response;
     }
 
+    // Route to show specific book
     #[Route('/api/show/{bookid}', name: 'book_by_id_api')]
     public function showProductById(
         BookRepository $bookRepository,
