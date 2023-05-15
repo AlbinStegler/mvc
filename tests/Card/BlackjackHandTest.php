@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
  */
 class BlackjackHandTest extends TestCase
 {
-    public function testCreateBlackjackHand() : void
+    public function testCreateBlackjackHand(): void
     {
         $bHand = new BlackjackHand();
         $this->assertInstanceOf("\App\Card\BlackjackHand", $bHand);
@@ -24,7 +24,7 @@ class BlackjackHandTest extends TestCase
         return $card;
     }
 
-    public function testPlayerWon() : void
+    public function testPlayerWon(): void
     {
         $player = new BlackjackHand();
         $bank = new BlackjackHand();
@@ -50,7 +50,7 @@ class BlackjackHandTest extends TestCase
         $this->assertTrue($player->playerWon($player, $bank2));
     }
 
-    public function testLowerPoints() : void
+    public function testLowerPoints(): void
     {
         $player = new BlackjackHand();
         $card1 = $this->createCardGraphic(14, "Spades");
@@ -65,14 +65,15 @@ class BlackjackHandTest extends TestCase
         $this->assertEquals($player->getSum(), 23);
     }
 
-    public function testGetHand() : void {
+    public function testGetHand(): void
+    {
         $player = new BlackjackHand();
         $card1 = $this->createCardGraphic(14, "Spades");
         $card2 = $this->createCardGraphic(12, "Diamonds");
 
         $player->add($card1);
         $player->add($card2);
-        
+
         $hand = $player->getHand();
 
         $copy = [$card1, $card2];
@@ -80,7 +81,8 @@ class BlackjackHandTest extends TestCase
         $this->assertEquals($hand, $copy);
     }
 
-    public function testMerge() : void {
+    public function testMerge(): void
+    {
         $player = new BlackjackHand();
         $player2 = new BlackjackHand();
 

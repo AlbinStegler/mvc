@@ -21,7 +21,7 @@ class DeckOfCards
         $this->size = 0;
     }
 
-    public function setupDeck() : void
+    public function setupDeck(): void
     {
         $style = ["clubs", "hearts", "spades", "diamonds"];
 
@@ -39,7 +39,7 @@ class DeckOfCards
     /**
      * @param CardGraphic[] $usedCards
     */
-    public function recreateDeck(array $usedCards) : void
+    public function recreateDeck(array $usedCards): void
     {
         $style = ["clubs", "hearts", "spades", "diamonds"];
         //Adding cards to deck
@@ -61,7 +61,7 @@ class DeckOfCards
     }
 
 
-    public function removeCard(CardGraphic $cardToRemove) : void
+    public function removeCard(CardGraphic $cardToRemove): void
     {
         $key = array_search($cardToRemove, $this->cards);
         if ($key !== false) {
@@ -70,17 +70,17 @@ class DeckOfCards
         }
     }
 
-    public function addCard(CardGraphic $cardToAdd) : void
+    public function addCard(CardGraphic $cardToAdd): void
     {
         $this->cards[] = $cardToAdd;
     }
-    public function shuffleDeck() : void
+    public function shuffleDeck(): void
     {
         shuffle($this->cards);
     }
     public function drawCard(): CardGraphic
     {
-        if (!empty($this->cards)){
+        if (!empty($this->cards)) {
             $temp = array_shift($this->cards);
             $this->size -= 1;
             return $temp;

@@ -22,7 +22,7 @@ class CardHand
     /**
      * Adds a card to the hand
      */
-    public function add(CardGraphic $card) : void
+    public function add(CardGraphic $card): void
     {
         $card->setStyle();
         $this->cards[] = $card;
@@ -30,7 +30,7 @@ class CardHand
     /**
      * Removes the card from the hand
      */
-    public function removeCard(CardGraphic $cardToRemove) : void
+    public function removeCard(CardGraphic $cardToRemove): void
     {
         $key = array_search($cardToRemove, $this->cards);
         if ($key !== false) {
@@ -42,7 +42,7 @@ class CardHand
     *
     * @return array<mixed> $arr
     */
-    public function getCards() : mixed
+    public function getCards(): mixed
     {
         $arr = [];
         if (!empty($this->cards)) {

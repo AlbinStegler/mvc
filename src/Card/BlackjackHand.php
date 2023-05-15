@@ -33,7 +33,7 @@ class BlackjackHand extends CardHand
     /**
      * Private function that lowers value of ace since ace got value of 1 and 11 in Blackjack
      */
-    private function reduceSumForAce(int $sum) : int
+    private function reduceSumForAce(int $sum): int
     {
         foreach ($this->cards as $card) {
             if ($card->showCard()["value"] == 14) {
@@ -74,20 +74,23 @@ class BlackjackHand extends CardHand
     /**
      * @return array<CardGraphic>
      */
-    public function getHand() : array {
+    public function getHand(): array
+    {
         return $this->cards;
     }
     /**
      * @param array<CardGraphic> $hand
      */
-    public function setHand(mixed $hand) : void {
+    public function setHand(mixed $hand): void
+    {
         $this->cards = $hand;
     }
     /**
      * @param array<CardGraphic> $cards
      * @return array<CardGraphic>
      */
-    public function mergeCards(mixed $cards) {
+    public function mergeCards(mixed $cards)
+    {
         $this->setHand(array_merge($this->cards, $cards));
         return $this->cards;
     }

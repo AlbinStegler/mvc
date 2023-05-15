@@ -38,7 +38,7 @@ class CardController extends AbstractController
         $session->remove("usedCards");
         return $this->render('card/show-deck.html.twig', $data);
     }
-        
+
     #[Route("/card/deck/draw", name: "show-one-card")]
     public function draw(SessionInterface $session): Response
     {
@@ -72,7 +72,7 @@ class CardController extends AbstractController
         }
         /**
          * @var array<CardGraphic> $thisTurn
-        */        
+        */
         $helper->saveToSession($session, $thisTurn);
 
         $data = ["kort" => $thisTurn, "antal" => $deck->getDeckSize()];

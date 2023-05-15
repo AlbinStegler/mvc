@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\Book;
@@ -19,14 +18,15 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class QuoteJson extends AbstractController
 {
-    // Landingpage 
+    // Landingpage
     #[Route("/api", name: "landing-Json")]
     public function jsonStart(BookRepository $bookRepository): Response
     {
         $allbooks = [];
         $allbooks["books"] = $bookRepository->findAll();
 
-        return $this->render('json/json.html.twig', $allbooks);;
+        return $this->render('json/json.html.twig', $allbooks);
+        ;
     }
 
     #[Route("/api/deck", name: "deck-Json", methods: ['GET'])]

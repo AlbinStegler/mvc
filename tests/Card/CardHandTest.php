@@ -9,14 +9,14 @@ use PHPUnit\Framework\TestCase;
  */
 class CardHandTest extends TestCase
 {
-    public function testCreateCardGraphic() : void
+    public function testCreateCardGraphic(): void
     {
         $card = new CardHand();
         $this->assertInstanceOf("\App\Card\CardHand", $card);
     }
 
-   
-    public function testAddCards() : void
+
+    public function testAddCards(): void
     {
         $cardHand = new CardHand();
         $this->assertEquals($cardHand->getCards(), []);
@@ -27,7 +27,7 @@ class CardHandTest extends TestCase
             $card->setStyle();
             $cardHand->add($card);
         }
-        
+
         $vals = $cardHand->getCards();
         /**
         * @var array{"value": mixed, "type": mixed, "style": mixed} $val
@@ -40,7 +40,7 @@ class CardHandTest extends TestCase
 
     }
 
-    public function testGetSum() : void
+    public function testGetSum(): void
     {
         $cardHand = new CardHand();
         for ($i = 4; $i < 10; $i++) {

@@ -19,12 +19,12 @@ class Card
         $this->type = "";
     }
 
-    public function setValue(int $newValue) : void
+    public function setValue(int $newValue): void
     {
         $this->value = $newValue;
     }
 
-    public function setType(string $newType) : void
+    public function setType(string $newType): void
     {
         $this->type = $newType;
     }

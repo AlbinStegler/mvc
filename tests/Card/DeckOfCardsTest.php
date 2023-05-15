@@ -9,13 +9,13 @@ use PHPUnit\Framework\TestCase;
  */
 class DeckOfCardsTest extends TestCase
 {
-    public function testCreateDeckOfCards() : void
+    public function testCreateDeckOfCards(): void
     {
         $card = new DeckOfCards();
         $this->assertInstanceOf("\App\Card\DeckOfCards", $card);
     }
 
-    public function testSetupDeck() : void
+    public function testSetupDeck(): void
     {
         $card = new DeckOfCards();
         $card->setupDeck();
@@ -49,7 +49,7 @@ class DeckOfCardsTest extends TestCase
         }
     }
 
-    public function testRecreateDeck() : void
+    public function testRecreateDeck(): void
     {
         $card = new DeckOfCards();
         $card->setupDeck();
@@ -68,7 +68,7 @@ class DeckOfCardsTest extends TestCase
         $this->assertTrue($deck2->equal($card));
     }
 
-    public function testShuffleDeck() : void
+    public function testShuffleDeck(): void
     {
         $card1 = new DeckOfCards();
         $card1->setupDeck();
@@ -78,7 +78,7 @@ class DeckOfCardsTest extends TestCase
         $this->assertFalse($card1->equal($card2));
     }
 
-    public function testDrawCard() : void
+    public function testDrawCard(): void
     {
         $card1 = new DeckOfCards();
         $card1->setupDeck();

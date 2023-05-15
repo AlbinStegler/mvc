@@ -16,7 +16,7 @@ class Helpers
         if ($session->has("usedCards")) {
             $used = $session->get("usedCards");
             $cardArr = [];
-            if (is_array($used)){
+            if (is_array($used)) {
                 foreach ($used as $card) {
                     $tCard = new CardGraphic();
                     $tCard->setValue($card["value"]);
@@ -35,7 +35,7 @@ class Helpers
     /**
     * @param array<CardGraphic> $thisTurn
     */
-    public static function saveToSession(SessionInterface $session, array $thisTurn) : string
+    public static function saveToSession(SessionInterface $session, array $thisTurn): string
     {
         $drawnCards = $session->get("usedCards");
         $hand = new BlackjackHand();
@@ -59,7 +59,7 @@ class Helpers
         if ($session->has("blackjackDeck")) {
             $used = $session->get("blackjackDeck");
             $cardArr = [];
-            if (is_array($used)){
+            if (is_array($used)) {
                 foreach ($used as $card) {
                     $tCard = new CardGraphic();
                     $tCard->setValue($card["value"]);
@@ -78,7 +78,7 @@ class Helpers
     /**
     * @param array<CardGraphic> $thisTurn
     */
-    public static function saveBlackjackDeckToSession(SessionInterface $session, array $thisTurn) : string
+    public static function saveBlackjackDeckToSession(SessionInterface $session, array $thisTurn): string
     {
         $drawnCards = $session->get("blackjackDeck");
         $hand = new BlackjackHand();
@@ -96,7 +96,7 @@ class Helpers
 
     }
 
-    public static function getPlayerHand(SessionInterface $session) : BlackjackHand
+    public static function getPlayerHand(SessionInterface $session): BlackjackHand
     {
         $hand = new BlackjackHand();
         if ($session->has("blackjackHand")) {
@@ -118,7 +118,7 @@ class Helpers
     /**
     * @param array<CardGraphic> $thisTurn
     */
-    public static function savePlayerHand(SessionInterface $session, array $thisTurn) : string
+    public static function savePlayerHand(SessionInterface $session, array $thisTurn): string
     {
         $drawnCards = $session->get("blackjackHand");
         $hand = new BlackjackHand();
@@ -135,7 +135,7 @@ class Helpers
         return "session created";
     }
 
-    public static function getBankHand(SessionInterface $session) : BlackjackHand
+    public static function getBankHand(SessionInterface $session): BlackjackHand
     {
         $hand = new BlackjackHand();
         if ($session->has("bankHand")) {
@@ -157,8 +157,8 @@ class Helpers
     /**
     * @param array<CardGraphic> $thisTurn
     */
-    public static function saveBankHand(SessionInterface $session, array $thisTurn) : string
-    {   
+    public static function saveBankHand(SessionInterface $session, array $thisTurn): string
+    {
         $drawnCards = $session->get("bankHand");
         $hand = new BlackjackHand();
         /**

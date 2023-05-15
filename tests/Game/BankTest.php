@@ -12,14 +12,14 @@ use PHPUnit\Framework\TestCase;
  */
 class BankTest extends TestCase
 {
-    public function testCreateBank() : void
+    public function testCreateBank(): void
     {
         $hand = new BlackjackHand();
         $bank = new Bank($hand);
         $this->assertInstanceOf("\App\Game\Bank", $bank);
     }
 
-    public function testCanIDraw() : void
+    public function testCanIDraw(): void
     {
         $cardHand = new BlackjackHand();
         $this->assertEquals($cardHand->getCards(), []);

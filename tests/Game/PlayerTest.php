@@ -12,14 +12,14 @@ use PHPUnit\Framework\TestCase;
  */
 class PlayerTest extends TestCase
 {
-    public function testCreatePlayer() : void
+    public function testCreatePlayer(): void
     {
         $hand = new BlackjackHand();
         $player = new Player($hand);
         $this->assertInstanceOf("\App\Game\Player", $player);
     }
 
-    public function testDraw() : void
+    public function testDraw(): void
     {
         $cardHand = new BlackjackHand();
         $this->assertEquals($cardHand->getCards(), []);
@@ -30,7 +30,7 @@ class PlayerTest extends TestCase
         $this->assertFalse($player->canIDraw(21));
     }
 
-    private function createCardGraphic(int $value, string $type) : CardGraphic
+    private function createCardGraphic(int $value, string $type): CardGraphic
     {
         $card = new CardGraphic();
         $card->setValue($value);
@@ -39,7 +39,7 @@ class PlayerTest extends TestCase
         return $card;
     }
 
-    public function testPlayerWon() : void
+    public function testPlayerWon(): void
     {
         $blackjack = new BlackjackHand();
         $ten = $this->createCardGraphic(10, "Diamonds");

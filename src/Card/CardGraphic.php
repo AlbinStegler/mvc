@@ -22,7 +22,7 @@ class CardGraphic extends Card
 
         return $convertion[$value];
     }
-    public function setStyle() : void
+    public function setStyle(): void
     {
         $folder = $this->nrToText($this->value);
         if ($this->value > 10) {
