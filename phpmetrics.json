@@ -3,7 +3,10 @@
         "src"
     ],
     "exclude": [
-      "test[s]?"
+        "test[s]?",
+        "src/Controller",
+        "src/Repository",
+        "src/Utils"
     ],
     "report": {
         "html": "docs/metrics"
