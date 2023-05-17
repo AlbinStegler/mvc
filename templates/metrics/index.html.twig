@@ -1,0 +1,27 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %}Analys{% endblock %}
+
+{% block main %}
+<h1>Introduktion</h1>
+
+<h2>Codestyle</h2>
+    <p>Codestyle syftar på hur man skriver sin kod. För att ha en bra kodstil ska koden vara lättförståelig och inte onödigt komplicerad. Detta behövs då man oftast är flera som arbetar med samma kod och då behöver man skriva koden enligt en standard för att andra ska förstå den. För att hälpa att uppnå detta använder man sig av linters som kan peka ut vissa fel som finns i koden enligt dess kodstandard.</p>
+<h2>Coverage</h2>
+    <p>Med coverage menar man hur mycket av koden som har testats. Detta är då de delar som enhetstestat för att de fungerar som inviduella delar och brukar mätas i procent av kod som testats.</p>
+<h2>Complexity</h2>
+    <p>Komplexitet innebär hur många vägar koden kan ta. Det kan man se som exempelvis hur många if, else, elseif samt while loopar som koden har. För varje av dessa som implementerar ökas komplexiteten med 1. Komplexiteten blir med andra ord högre ju fler beslut som tas.
+<h2>Cohesion</h2>
+<p>Cohesion beskriver hur sammanhängande en klass är och hur de olika delarna av koden samarbetar för att uppnå önskat utfall.</p>
+<h2>Coupling</h2>
+    <p>Coupling handlar om kopplingar till andra klasser. Det finns två typer av kopplingar, en klass kan antingen ha koppling till en annan klass(Ce), eller så har en annan klass koppling till "din" klass(Ca). Kopplingen mellan klasserna kan olika starka kopplingar.</p>
+<h2>CRAP</h2>
+    <p>Change Risk Analyser är ett tal som försöker analysera hur många dåliga metoder som har en större risk att sluta fungera om man ändrar i dem. Det är en mix av storlek av metoden komplexitet och hur bra testad den är.</p>
+<h1>Phpmetrics</h1>
+<p>I mitt program har jag 22 klasser och sex violations. Helpers har en violation Blob / God object. Detta är för att klassen finns för att hålla i funktioner. Detta är klassen Helpers enda funktion och därför får jag att klassen har en avsaknad av Cohesion. Tanken med klassen är att använda denna i flera kontrollers. Ett alternativ för att fixa detta är att göra så att denna klass ärver från AbsractController och sedan arbeta med denna klass istället.</p>
+<p>Komplexiteten på min klass Quote Json och dess Cohesion är inte speciellt bra. Detta är dock svårt att åtgärda eftersom att klassen använder sig av många funktioner från olika klasser för att det har varit kraven i kursmomenten. För att minska dess komplexitet bör man skapa flera kontroller klasser för de olika kursmomentet det bör sänka komplexiteten och ge en bättre Cohesion score</p>
+<p>Utöver detta har jag Package Violation på Card klassen då den inte används i programmet kan den göras till abstrakt.</p>
+<h1>Scrutinizer</h1>
+<p></p>
+{% endblock %}

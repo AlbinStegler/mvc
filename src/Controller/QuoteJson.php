@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 
-use App\Entity\Book;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,8 +24,7 @@ class QuoteJson extends AbstractController
         $allbooks = [];
         $allbooks["books"] = $bookRepository->findAll();
 
-        return $this->render('json/json.html.twig', $allbooks);
-        ;
+        return $this->render('json/json.html.twig', $allbooks);;
     }
 
     #[Route("/api/deck", name: "deck-Json", methods: ['GET'])]
