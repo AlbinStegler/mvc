@@ -3,6 +3,10 @@ imports:
 
 filter:
     excluded_paths: [vendor/*, test/*]
+            - "src/Repository"   # Exclude the tests directory
+            - "src/Utils"
+            - "src/Entity"
+            - "src/Controller"
 
 build:
     image: default-bionic
@@ -18,12 +22,6 @@ build:
             tests:
                 override:
                     - php-scrutinizer-run
-    filter:
-        excluded_paths:
-            - "src/Repository"   # Exclude the tests directory
-            - "src/Utils"
-            - "src/Entity"
-            - "src/Controller"
     tests:
         override:
             -   command: "composer phpunit"
