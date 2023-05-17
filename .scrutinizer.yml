@@ -2,13 +2,8 @@ imports:
     - php
 
 filter:
-    excluded_paths: 
-                -vendor/*
-                -test/*
-                -src/Repository/*
-                -src/Utils/* 
-                -src/Entity/*
-                -src/Controller/*
+    paths: -src/
+    excluded_paths: -vendor/* -test/* -src/Controller -src/Utils -src/Repository
 
 build:
     image: default-bionic
