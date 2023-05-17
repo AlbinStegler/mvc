@@ -2,7 +2,7 @@ imports:
     - php
 
 filter:
-    excluded_paths: [vendor/*, test/*, src/Controller, src/Utils, src/Repository]
+    excluded_paths: [vendor/*, test/*]
 
 build:
     image: default-bionic
@@ -23,5 +23,6 @@ build:
             -   command: "composer phpunit"
                 # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
                 coverage:
+                    ignore: [src/Controller, src/Utils, src/Repository]
                     file: "docs/coverage.clover"
                     format: "php-clover"
