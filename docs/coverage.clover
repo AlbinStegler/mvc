@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684316052">
-  <project timestamp="1684316052">
+<coverage generated="1684319144">
+  <project timestamp="1684319144">
     <file name="/home/albin/dbwebb-kurser/mvc/me/report/src/Card/BlackjackHand.php">
       <class name="App\Card\BlackjackHand" namespace="global">
         <metrics complexity="19" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="28" elements="35" coveredelements="35"/>
@@ -223,12 +223,6 @@
       <line num="45" type="stmt" count="1"/>
       <metrics loc="49" ncloc="46" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="18" coveredelements="18"/>
     </file>
-    <file name="/home/albin/dbwebb-kurser/mvc/me/report/src/Kernel.php">
-      <class name="App\Kernel" namespace="global">
-        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-      </class>
-      <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <metrics files="8" loc="496" ncloc="410" classes="7" methods="38" coveredmethods="37" conditionals="0" coveredconditionals="0" statements="142" coveredstatements="141" elements="180" coveredelements="178"/>
+    <metrics files="7" loc="484" ncloc="398" classes="7" methods="38" coveredmethods="37" conditionals="0" coveredconditionals="0" statements="142" coveredstatements="141" elements="180" coveredelements="178"/>
   </project>
 </coverage>
