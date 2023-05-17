@@ -2,7 +2,6 @@ imports:
     - php
 
 filter:
-    paths: [src/*]
     excluded_paths: [vendor/*, test/*, src/Controller, src/Utils, src/Repository]
 
 build:
