@@ -26,5 +26,4 @@ class MeController extends AbstractController
     {
         return $this->render('report.html.twig');
     }
-
 }

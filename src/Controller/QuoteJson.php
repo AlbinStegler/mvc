@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Card\BlackjackHand;
 use App\Card\DeckOfCards;
 use App\Card\CardGraphic;
-use App\Utils\Helpers;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class QuoteJson extends AbstractController
@@ -60,8 +60,7 @@ class QuoteJson extends AbstractController
     #[Route("/api/deck/draw", name: "draw-Json", methods: ['POST'])]
     public function draw(SessionInterface $session): Response
     {
-        $helper = new Helpers();
-        $deck = $helper->createDeckFromSession($session);
+        $deck = $this->createDeckFromSession($session);
         $deck->shuffleDeck();
         $drawn = $deck->drawCard()->showCard();
         $data = [
@@ -77,15 +76,14 @@ class QuoteJson extends AbstractController
         /**
          * @var CardGraphic $drawn
          */
-        $helper->saveToSession($session, [$drawn]);
+        $this->saveToSession($session, [$drawn]);
         return $response;
     }
 
     #[Route("/api/deck/draw/{num<\d+>}", name: "draw-mul-Json", methods: ['POST'])]
     public function drawMultiple(int $num, SessionInterface $session): Response
     {
-        $helper = new Helpers();
-        $deck = $helper->createDeckFromSession($session);
+        $deck = $this->createDeckFromSession($session);
         $deck->shuffleDeck();
         $thisTurn = [];
         if ($num > $deck->getDeckSize()) {
@@ -99,7 +97,7 @@ class QuoteJson extends AbstractController
         /**
          * @var array<CardGraphic> $thisTurn
          */
-        $helper->saveToSession($session, $thisTurn);
+        $this->saveToSession($session, $thisTurn);
         $data = ["kort" => $thisTurn, "antal" => $deck->getDeckSize()];
 
         $response = new JsonResponse($data);
@@ -139,63 +137,47 @@ class QuoteJson extends AbstractController
         return $response;
     }
 
-    #[Route("/api/game", name: "game-stats", methods: ['POST'])]
-    public function game(SessionInterface $session): Response
+    //Functions
+
+    private function createDeckFromSession(SessionInterface $session): DeckOfCards
     {
-        $helper = new Helpers();
-        //Hämtar kort från session
-        $bank = $helper->getBankHand($session);
-        $player = $helper->getPlayerHand($session);
-        $deck = $helper->createDeckFromSession($session);
-        $deck->shuffleDeck();
+        $deck = new DeckOfCards();
+        if ($session->has("usedCards")) {
+            $used = $session->get("usedCards");
+            $cardArr = [];
+            if (is_array($used)) {
+                foreach ($used as $card) {
+                    $tCard = new CardGraphic();
+                    $tCard->setValue($card["value"]);
+                    $tCard->setType($card["type"]);
+                    $tCard->setStyle();
+                    $cardArr[] = $tCard;
+                }
+            }
+            $deck->recreateDeck($cardArr);
+            return $deck;
+        }
+        $deck->setupDeck();
 
-        dump($bank);
-        dump($player);
-
-        $data = ["bank" => $bank->getCards(), "spelare" => $player->getCards(), "deck" => $deck->showDeck()];
-
-        $response = new JsonResponse($data);
-
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
+        return $deck;
     }
-
-    #[Route("/api/library/books", name: "showallApi")]
-    public function showAllBooks(BookRepository $bookRepository): Response
+    /**
+     * @param array<CardGraphic> $thisTurn
+     */
+    private function saveToSession(SessionInterface $session, array $thisTurn): string
     {
-        $all = $bookRepository->findAll();
-
-        $response = $this->json($all);
-
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
-    }
-
-    // Route to show specific book
-    #[Route('/api/show/{bookid}', name: 'book_by_id_api')]
-    public function showProductById(
-        BookRepository $bookRepository,
-        int $bookid
-    ): Response {
-        $book = $bookRepository
-            ->find($bookid);
-
-        $response = $this->json($book);
-
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
-    }
-    // Post route for showing one book redirects to book_by_id_api
-    #[Route("/api/showbook", name: "showbook", methods: ["POST"])]
-    public function showOne(Request $request): Response
-    {
-        $bookId = ($request->request->get("id"));
-        return $this->redirectToRoute('book_by_id_api', ["bookid" => (int)$bookId]);
+        $drawnCards = $session->get("usedCards");
+        $hand = new BlackjackHand();
+        if ($session->has("usedCards")) {
+            /**
+             * @var array<CardGraphic> $drawnCards
+             */
+            $hand->setHand($drawnCards);
+            $allUsed = $hand->mergeCards($thisTurn);
+            $session->set("usedCards", $allUsed);
+            return "session exists";
+        }
+        $session->set("usedCards", $thisTurn);
+        return "session created";
     }
 }

@@ -7,14 +7,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Utils\Helpers;
 use App\Card\DeckOfCards;
 use App\Card\BlackjackHand;
 use App\Card\CardGraphic;
 use App\Game\Player;
 use App\Game\Bank;
 
-use PHPUnit\TextUI\Help;
 
 class CardGameController extends AbstractController
 {
@@ -32,10 +30,9 @@ class CardGameController extends AbstractController
     #[Route("/game/start", name: "start")]
     public function start(SessionInterface $session): Response
     {
-        $helper = new Helpers();
         //Korten hämtas från session
-        $hand = $helper->getPlayerHand($session);
-        $bankHand = $helper->getBankHand($session);
+        $hand = $this->getPlayerHand($session);
+        $bankHand = $this->getBankHand($session);
         $player = new Player($hand);
 
         $playerLost = false;
@@ -52,22 +49,27 @@ class CardGameController extends AbstractController
             $stop = true;
             $session->set("stop", true);
             $playerWon = $player->playerWon($bankHand);
-            $data = ["cards" => $hand->getCards(),
-            "value" => $hand->getSum(),
-            "player" => $playerRoll,
-            "lost" => $playerLost,
-            "playerWon" => $playerWon,
-            "bankHand" => $bankHand->getCards(),
-            "bankSum" => $bankHand->getSum(),
-            "stop" => $stop];
-        } if (!$session->has("stop")) {
-            $data = ["cards" => $hand->getCards(),
-            "value" => $hand->getSum(),
-            "player" => $playerRoll,
-            "lost" => $playerLost,
-            "bankHand" => $bankHand->getCards(),
-            "bankSum" => $bankHand->getSum(),
-            "stop" => $stop];
+            $data = [
+                "cards" => $hand->getCards(),
+                "value" => $hand->getSum(),
+                "player" => $playerRoll,
+                "lost" => $playerLost,
+                "playerWon" => $playerWon,
+                "bankHand" => $bankHand->getCards(),
+                "bankSum" => $bankHand->getSum(),
+                "stop" => $stop
+            ];
+        }
+        if (!$session->has("stop")) {
+            $data = [
+                "cards" => $hand->getCards(),
+                "value" => $hand->getSum(),
+                "player" => $playerRoll,
+                "lost" => $playerLost,
+                "bankHand" => $bankHand->getCards(),
+                "bankSum" => $bankHand->getSum(),
+                "stop" => $stop
+            ];
         }
 
 
@@ -78,10 +80,10 @@ class CardGameController extends AbstractController
     #[Route("/game/start/player-draw", name: "player-draw", methods: ['POST'])]
     public function drawPlayer(SessionInterface $session): Response
     {
-        $helper = new Helpers();
+
         //Hämtar från Session
-        $deck = $helper->createBlackjackDeckFromSession($session);
-        $hand = $helper->getPlayerHand($session);
+        $deck = $this->createBlackjackDeckFromSession($session);
+        $hand = $this->getPlayerHand($session);
         $deck->shuffleDeck();
         $drawn = $deck->drawCard();
         $hand->add($drawn);
@@ -89,10 +91,10 @@ class CardGameController extends AbstractController
         //Sparar draget kort till session och redirectar till startsida
         /**
          * @var array<CardGraphic> $card2Show
-        */
+         */
         $card2Show = [$drawn->showCard()];
-        $helper->savePlayerHand($session, $card2Show);
-        $helper->saveBlackjackDeckToSession($session, $card2Show);
+        $this->savePlayerHand($session, $card2Show);
+        $this->saveBlackjackDeckToSession($session, $card2Show);
         return $this->redirectToRoute('start');
     }
 
@@ -108,9 +110,8 @@ class CardGameController extends AbstractController
     public function bankDraw(SessionInterface $session): Response
     {
         //OM SPELARE STANNAR
-        $helper = new Helpers();
-        $deck = $helper->createBlackjackDeckFromSession($session);
-        $hand = $helper->getBankHand($session);
+        $deck = $this->createBlackjackDeckFromSession($session);
+        $hand = $this->getBankHand($session);
         $bank = new Bank($hand);
         $deck->shuffleDeck();
         $session->set("stop", true);
@@ -127,13 +128,136 @@ class CardGameController extends AbstractController
         //Sparar till session
         /**
          * @var array<CardGraphic> $allDrawn
-        */
-        $helper->saveBankHand($session, $allDrawn);
+         */
+        $this->saveBankHand($session, $allDrawn);
         /**
          * @var array<CardGraphic> $card2Show
-        */
+         */
         $card2Show = [$drawn->showCard()];
-        $helper->saveBlackjackDeckToSession($session, $card2Show);
+        $this->saveBlackjackDeckToSession($session, $card2Show);
         return $this->redirectToRoute('start');
+    }
+
+    // Functions
+
+    private function createBlackjackDeckFromSession(SessionInterface $session): DeckOfCards
+    {
+        $deck = new DeckOfCards();
+        if ($session->has("blackjackDeck")) {
+            $used = $session->get("blackjackDeck");
+            $cardArr = [];
+            if (is_array($used)) {
+                foreach ($used as $card) {
+                    $tCard = new CardGraphic();
+                    $tCard->setValue($card["value"]);
+                    $tCard->setType($card["type"]);
+                    $tCard->setStyle();
+                    $cardArr[] = $tCard;
+                }
+            }
+            $deck->recreateDeck($cardArr);
+            return $deck;
+        }
+        $deck->setupDeck();
+
+        return $deck;
+    }
+    /**
+     * @param array<CardGraphic> $thisTurn
+     */
+    private function saveBlackjackDeckToSession(SessionInterface $session, array $thisTurn): string
+    {
+        $drawnCards = $session->get("blackjackDeck");
+        $hand = new BlackjackHand();
+        if ($session->has("blackjackDeck")) {
+            /**
+             * @var array<CardGraphic> $drawnCards
+             */
+            $hand->setHand($drawnCards);
+            $allUsed = $hand->mergeCards($thisTurn);
+            $session->set("blackjackDeck", $allUsed);
+            return "session exists";
+        }
+        $session->set("blackjackDeck", $thisTurn);
+        return "session created";
+    }
+
+    private function getPlayerHand(SessionInterface $session): BlackjackHand
+    {
+        $hand = new BlackjackHand();
+        if ($session->has("blackjackHand")) {
+            $used = $session->get("blackjackHand");
+            if (is_array($used)) {
+                foreach ($used as $card) {
+                    if (is_array($card) && array_key_exists('value', $card) && array_key_exists('type', $card)) {
+                        $tCard = new CardGraphic();
+                        $tCard->setValue($card["value"]);
+                        $tCard->setType($card["type"]);
+                        $tCard->setStyle();
+                        $hand->add($tCard);
+                    }
+                }
+            }
+        }
+        return $hand;
+    }
+    /**
+     * @param array<CardGraphic> $thisTurn
+     */
+    private function savePlayerHand(SessionInterface $session, array $thisTurn): string
+    {
+        $drawnCards = $session->get("blackjackHand");
+        $hand = new BlackjackHand();
+        if ($session->has("blackjackHand")) {
+            /**
+             * @var array<CardGraphic> $drawnCards
+             */
+            $hand->setHand($drawnCards);
+            $allUsed = $hand->mergeCards($thisTurn);
+            $session->set("blackjackHand", $allUsed);
+            return "session exists";
+        }
+        $session->set("blackjackHand", $thisTurn);
+        return "session created";
+    }
+
+    private function getBankHand(SessionInterface $session): BlackjackHand
+    {
+        $hand = new BlackjackHand();
+        if ($session->has("bankHand")) {
+            $used = $session->get("bankHand");
+            if (is_array($used)) {
+                foreach ($used as $card) {
+                    if (is_array($card) && array_key_exists('value', $card) && array_key_exists('type', $card)) {
+                        $tCard = new CardGraphic();
+                        $tCard->setValue($card["value"]);
+                        $tCard->setType($card["type"]);
+                        $tCard->setStyle();
+                        $hand->add($tCard);
+                    }
+                }
+            }
+        }
+        return $hand;
+    }
+    /**
+     * @param array<CardGraphic> $thisTurn
+     */
+    private function saveBankHand(SessionInterface $session, array $thisTurn): string
+    {
+        $drawnCards = $session->get("bankHand");
+        $hand = new BlackjackHand();
+        /**
+         * @var array<CardGraphic> $drawnCards
+         */
+        if ($session->has("bankHand")) {
+            $hand->setHand($drawnCards);
+            $allUsed = $hand->mergeCards($thisTurn);
+            $session->set("bankHand", $allUsed);
+            return "session exists";
+        }
+
+        $session->set("bankHand", $thisTurn);
+        return "session created";
     }
 }

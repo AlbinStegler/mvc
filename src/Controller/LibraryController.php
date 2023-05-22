@@ -50,6 +50,7 @@ class LibraryController extends AbstractController
     #[Route("/library/showall", name: "showall")]
     public function showAll(BookRepository $bookRepository, Request $request): Response
     {
+        $all = [];
         $all["books"] = $bookRepository->findAll();
 
         return $this->render('library/show-all.html.twig', $all);
@@ -62,6 +63,7 @@ class LibraryController extends AbstractController
         BookRepository $bookRepository,
         int $id
     ): Response {
+        $book = [];
         $book["book"] = $bookRepository
             ->find($id);
 
@@ -74,6 +76,7 @@ class LibraryController extends AbstractController
         int $id
     ): Response {
         $entityManager = $doctrine->getManager();
+        $book = new Book();
         $book = $entityManager->getRepository(Book::class)->find($id);
 
         if (!$book) {

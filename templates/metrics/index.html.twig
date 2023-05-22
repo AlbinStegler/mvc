@@ -20,14 +20,26 @@
     <p>Change Risk Analyser är ett tal som försöker analysera hur många dåliga metoder som har en större risk att sluta fungera om man ändrar i dem. Det är en mix av storlek av metoden komplexitet och hur bra testad den är.</p>
 <h1>Phpmetrics</h1>
 <p>I mitt program har jag 22 klasser och sex violations. Helpers har en violation Blob / God object. Detta är för att klassen finns för att hålla i funktioner. Detta är klassen Helpers enda funktion och därför får jag att klassen har en avsaknad av Cohesion. Tanken med klassen är att använda denna i flera kontrollers. Ett alternativ för att fixa detta är att göra så att denna klass ärver från AbsractController och sedan arbeta med denna klass istället.</p>
+<a href="img/Cohesion.png"><img src={{asset('img/Cohesion.png')}}></a>
 <p>Komplexiteten på min klass Quote Json och dess Cohesion är inte speciellt bra. Detta är dock svårt att åtgärda eftersom att klassen använder sig av många funktioner från olika klasser för att det har varit kraven i kursmomenten. För att minska dess komplexitet bör man skapa flera kontroller klasser för de olika kursmomentet det bör sänka komplexiteten och ge en bättre Cohesion score</p>
+<a href="img/Complexity.png"><img src={{asset('img/Complexity.png')}}></a>
 <p>Utöver detta har jag Package Violation på Card klassen då den inte används i programmet kan den göras till abstrakt.</p>
+<a href="img/abstract_class.png"><img src={{asset('img/abstract_class.png')}}></a>
 <h1>Scrutinizer</h1>
 <div class="badges">
-<img src="https://scrutinizer-ci.com/g/AlbinStegler/mvc/badges/quality-score.png?b=main" alt="Scrutinizer Code Quality" />
-<img src="https://scrutinizer-ci.com/g/AlbinStegler/mvc/badges/coverage.png?b=main" alt="Code Coverage"  />
+<a href="https://scrutinizer-ci.com/g/AlbinStegler/mvc/code-structure/main"><img src="https://scrutinizer-ci.com/g/AlbinStegler/mvc/badges/quality-score.png?b=main" alt="Scrutinizer Code Quality" /></a>
+<a href="https://scrutinizer-ci.com/g/AlbinStegler/mvc/code-structure/main/code-coverage"><img src="https://scrutinizer-ci.com/g/AlbinStegler/mvc/badges/coverage.png?b=main" alt="Code Coverage"  /></a>
 <img src="https://scrutinizer-ci.com/g/AlbinStegler/mvc/badges/build.png?b=main" alt="Build Status" />
 <img src="https://scrutinizer-ci.com/g/AlbinStegler/mvc/badges/code-intelligence.svg?b=main" alt="Code Intelligence Status" />
 </div>
-<p></p>
+<p>I scrutinizer i library controller klassen har jag inte definerat några variabler som jag använder och detta är något som bör åtgärdas.</p>
+    <a href="img/Bestpractice.png"><img src={{asset('img/Bestpractice.png')}}></a>
+
+<p>Jag har även glömt att ta bort Repositoryklassen för Product som jag flyttat över från en uppgift tidigare denna bör tas bort då den ej används</p>
+<p>Min coverage score är väldigt låg då jag inte har testat mina kontrollers. För att lösa detta bör jag antingen ta bort så att dessa inte ses av Scrutinizer eller det bättre alternativet testas. Samma sak gäller klasserna Helpers samt Entity klasserna. Dessa har inga tester vilket gör att de jag får en låg score på coverage.</p> 
+    <a href="https://scrutinizer-ci.com/g/AlbinStegler/mvc/code-structure/main/code-coverage"><img src="https://scrutinizer-ci.com/g/AlbinStegler/mvc/badges/coverage.png?b=main" alt="Code Coverage"  /></a>
+
+<h1>Förbättringar</h1>
+<p>De förbättringarna jag vill göra är att fixa så att jag får bättre coverage på min kod. Sedan vill jag fixa de issuies som jag har i Scrutinizer då åtgärderna förmodligen är enkla. Det sista som jag ska åtgärda är felen blob / godobject som jag fick i phpmetrics.</p>
+<p>Om jag fixar åtgärderna ovan bör jag få 10 i score från Scrutinizer samt en högre code coverage. I phpmetrics kommer skillnaden vara antalet violations som bör minska till fyra.</p>
 {% endblock %}
