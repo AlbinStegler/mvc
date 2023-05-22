@@ -48,7 +48,7 @@ class LibraryController extends AbstractController
     }
 
     #[Route("/library/showall", name: "showall")]
-    public function showAll(BookRepository $bookRepository, Request $request): Response
+    public function showAll(BookRepository $bookRepository): Response
     {
         $all = [];
         $all["books"] = $bookRepository->findAll();
@@ -79,12 +79,6 @@ class LibraryController extends AbstractController
         $book = new Book();
         $book = $entityManager->getRepository(Book::class)->find($id);
 
-        if (!$book) {
-            throw $this->createNotFoundException(
-                'No book found for id ' . $id
-            );
-        }
-
         $entityManager->remove($book);
         $entityManager->flush();
 
@@ -96,7 +90,7 @@ class LibraryController extends AbstractController
         BookRepository $bookRepository,
         int $id
     ): Response {
-
+        $book = [];
         $book["book"] = $bookRepository
             ->find((int)$id);
 
@@ -110,7 +104,6 @@ class LibraryController extends AbstractController
         $data = ($request->request->all());
         $entityManager = $doctrine->getManager();
 
-        $entityManager = $doctrine->getManager();
         /**
          * @var Book $book
          */

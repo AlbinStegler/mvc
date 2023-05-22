@@ -12,13 +12,14 @@ class LuckyController extends AbstractController
     #[Route('/lucky', name: "lucky")]
     public function number(): Response
     {
-        $number = 0;
         $number = random_int(0, 100);
         $data = [
             'number' => $number
         ];
 
-        return $this->render('lucky_number.html.twig', $data);
+        return $this->
+        /** @scrutinizer ignore-call */
+        render('lucky_number.html.twig', $data);
     }
 
     #[Route("/lucky/hi")]
