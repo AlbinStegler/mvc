@@ -15,6 +15,13 @@ class BookTest extends TestCase
         $this->assertInstanceOf("\App\Entity\Book", $book);
     }
 
+    public function testId(): void
+    {
+        $book = new Book();
+        $val = $book->getId();
+        $this->assertEquals($val, null);
+    }
+
     public function testTitle(): void
     {
         $book = new Book();
@@ -30,9 +37,9 @@ class BookTest extends TestCase
         $book = new Book();
         $val = $book->getIsbn();
         $this->assertEquals($val, null);
-        $book->setIsbn("7126390767510");
+        $book->setIsbn(7126390767510);
         $val = $book->getIsbn();
-        $this->assertEquals($val, "7126390767510");
+        $this->assertEquals($val, 7126390767510);
     }
 
     public function testGetSetAuthor(): void
