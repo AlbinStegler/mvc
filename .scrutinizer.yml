@@ -4,7 +4,7 @@ imports:
 filter:
     excluded_paths: [vendor/*, test/*]
 
-    dependency_paths: [.php-cs-fixer-dist.php, src/Kernel.php, tests/config.php]
+    dependency_paths: [.php-cs-fixer-dist.php, src/Kernel.php, tests/config.php ]
     
 build:
 
@@ -28,3 +28,7 @@ build:
                 coverage:
                     file: "docs/coverage.clover"
                     format: "php-clover"
+                    exclude:
+                    - src/Controller
+                    - src/Entity
+                    - src/Repository
