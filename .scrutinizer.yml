@@ -3,7 +3,10 @@ imports:
 
 filter:
     excluded_paths: [vendor/*, test/*]
-    excluded_files: [.php-cs-fixer-dist.php]
+    excluded_files: 
+    - ".php-cs-fixer-dist.php"
+    - "src/Kernel.php"
+    - "tests"
 
 build:
     image: default-bionic
