@@ -3,6 +3,8 @@ imports:
 
 filter:
     excluded_paths: [vendor/*, test/*, .php-cs-fixer-dist.php, src/Kernel.php, tests/config.php]
+
+    dependency_paths: [.php-cs-fixer-dist.php, src/Kernel.php, tests/config.php]
     
 build:
 
