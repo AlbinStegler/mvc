@@ -5,13 +5,14 @@ filter:
     excluded_paths: [vendor/*, test/*]
 
 build:
-    image: default-bionic
-    excluded_files: 
-    - ".php-cs-fixer-dist.php"
-    - "src/Kernel.php"
-    - "tests"
+    image: default-bionic    
     nodes:
         my-tests:
+            paths:
+                excluded:
+                - ".php-cs-fixer-dist.php"
+                - "src/Kernel.php"
+                - "tests/config.php"
             environment:
                 php:
                     version: 8.1.13
