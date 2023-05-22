@@ -18,8 +18,8 @@ class LuckyController extends AbstractController
         ];
 
         return $this->
-        /** @scrutinizer ignore-call */
-        render('lucky_number.html.twig', $data);
+            /** @scrutinizer ignore-call */
+            render('lucky_number.html.twig', $data);
     }
 
     #[Route("/lucky/hi")]
