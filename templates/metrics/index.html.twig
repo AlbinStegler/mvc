@@ -36,10 +36,23 @@
     <a href="img/Bestpractice.png"><img src={{asset('img/Bestpractice.png')}}></a>
 
 <p>Jag har även glömt att ta bort Repositoryklassen för Product som jag flyttat över från en uppgift tidigare denna bör tas bort då den ej används</p>
+
 <p>Min coverage score är väldigt låg då jag inte har testat mina kontrollers. För att lösa detta bör jag antingen ta bort så att dessa inte ses av Scrutinizer eller det bättre alternativet testas. Samma sak gäller klasserna Helpers samt Entity klasserna. Dessa har inga tester vilket gör att de jag får en låg score på coverage.</p> 
     <a href="https://scrutinizer-ci.com/g/AlbinStegler/mvc/code-structure/main/code-coverage"><img src="https://scrutinizer-ci.com/g/AlbinStegler/mvc/badges/coverage.png?b=main" alt="Code Coverage"  /></a>
 
 <h1>Förbättringar</h1>
-<p>De förbättringarna jag vill göra är att fixa så att jag får bättre coverage på min kod. Sedan vill jag fixa de issuies som jag har i Scrutinizer då åtgärderna förmodligen är enkla. Det sista som jag ska åtgärda är felen blob / godobject som jag fick i phpmetrics.</p>
+<p>De förbättringarna jag vill göra är att fixa så att jag får bättre coverage på min kod. Sedan vill jag fixa de issues som jag har i Scrutinizer då åtgärderna förmodligen är enkla. Det sista som jag ska åtgärda är felen blob / godobject som jag fick i phpmetrics.</p>
 <p>Om jag fixar åtgärderna ovan bör jag få 10 i score från Scrutinizer samt en högre code coverage. I phpmetrics kommer skillnaden vara antalet violations som bör minska till fyra.</p>
+<h2>Efter implementering</h2>
+<p>Efter att implementerat det ovan märkte jag att det är vissa saker som förbättrats, men vissa saker som är oförändrade. Att få mer coverage genom att excludera filer är inte det som man vill uppnå då man egentligen inte har åstakommit något med detta. Jag skapade en testklass för den nya book klassen vilket gav mig 3 % mer coverage i resultat. För att uppnå 100% kan man exkludera de filer som man inte har tester på, men detta skulle inte förbättra koden utan bara ge en falsk bild av projektet i sig. Därför låter jag mitt coverage resultat vara lågt eftersom att jag inte har några tester för mina controllerklasser i dagsläget.</p>
+<p>Issuesen som fanns är åtgärdade, men resultatet blev ej som förväntat då betyget ej höjdes. Orsaken till mitt betyg har inte med issiuesen att göra. Det som behöver fixas för att få högre betyg är att sänka komplexiteten i mina funktioner. Ett betyg på 9.82 är inte ett dåligt betyg och de funktionerna som har B i betyg kan möjligtvis förenklas men de kommer fortfarande behöva vara komplexa då de utför svårare beräkningar.</p>
+<a href="img/changes.png"><img src={{asset('img/changes.png')}}></a>
+
+<p>För att få bort god object från de två klasserna Helpers samt Quotejson försökte jag först att göra de till klasser som ärvde ifrån AbstractController och använde dessa istället, vilket ej åtgärdade problemet. För att få bort det tog jag i slutändan bort Helpersklassen och la funktionerna i de klasserna som använde sig av dessa. Hur bra detta är kan man diskutera då det skapar mer duplicerad kod vilket jag ville undvika. Detta löste dock problemet med klassen då funktionen av denna var att agera som en "godclass". För att bli av med QuoteJsonControllers problem skapade jag en till kontroller och flyttade hälften av routsen till denna. Problemet med den klassen var att den hade kopplingar till många andra klasser och därför ansågs den som en godclass. Efter att åtgärdat detta försvann dess fel och antalet violation gick ner till 4 st.</p>
+<a href="img/violations.png"><img src={{asset('img/violations.png')}}></a>
+
+<h1>Diskussion</h1>
+<p>Att arbeta med kodkvalite är en bra sak. Oftast arbetar man många i ett projekt och då är det viktigt att ha tydliga riktlinjer för hur man ska skriva koden, eftersom att flera ska förstå sig på den. Om man arbetar med liknande verktyg som dessa får man en bra grund i att skriva en förståelig kod. Att arbeta med automatiserade tester är ett ganska smidigt sätt att arbeta då mycket sker automatikt. Dessa tester sker också på samma sätt genom all kod vilket skapar en enhetlig testning.</p>
+<p>En nackdel kan vara att det tar tid att sätta upp miljön och att fixa sin kod samt att vissa paket kan kollidera mot miljön vilket kräver mer arbete för att fixa detta. Detta kan man dock tjäna in om man har skrivit dålig kod som behöver skrivas om en bit in i projektet.</p>
+
 {% endblock %}

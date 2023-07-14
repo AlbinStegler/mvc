@@ -13,7 +13,6 @@ use App\Card\CardGraphic;
 use App\Game\Player;
 use App\Game\Bank;
 
-
 class CardGameController extends AbstractController
 {
     #[Route("/game", name: "game")]

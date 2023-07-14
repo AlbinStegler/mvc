@@ -76,6 +76,9 @@ class LibraryController extends AbstractController
         int $id
     ): Response {
         $entityManager = $doctrine->getManager();
+        /**
+         * @var Book $book
+         */
         $book = $entityManager->getRepository(Book::class)->find($id);
 
         $entityManager->remove($book);

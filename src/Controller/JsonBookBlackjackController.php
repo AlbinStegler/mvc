@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class JsonBookBlackjackController extends AbstractController
 {
-
     #[Route("/api/game", name: "game-stats", methods: ['POST'])]
     public function game(SessionInterface $session): Response
     {

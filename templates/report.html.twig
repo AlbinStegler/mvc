@@ -43,6 +43,9 @@
     <p>ORM påminner något om hur vi jobbade mot SQL med JavaScript fast skillnaden här är att man slipper skriva SQL queries för att de finns i klasserna.</p>
     <p>Jag har lärt mig hur man skapar en databas med ORM med Symfony för att skapa och modifiera databasen.</p>
     <h2 id="6">Kmom06</h2>
+    <p>Jag tycker att gränssnittet är snyggt och enkelt att använda. Det finns tydliga grafer samt bilder som visar kopplingar mellan klasser och det är enkelt att använda. Jag tycker att det bästa var funktionen med att se kopplingar mellan klasser.</p>
+    <p>Att integrera Scrutinizer var lite krångligt för mig då min sass modul inte var korrekt installerad vilket resulterade i en build som "faila". Verktyget är bra att ha då testerna sker automatiskt vid push och det är inget man måste tänka på för att hålla det uppdaterat. Jag föredrog php metrics UI då man tydligt kunde se vad som var fel, men jag gillade badgesen i Scrutinizer. Jag fick 27% coverage i starten av bygget då jag inte har tester på controller klasserna och där har jag majoriteten av min kod.</p>
+    <p>Kodkvalite enligt mig är en läsbar kod. Vissa saker med testerna kan skapa en renare kod, men ett exempel där jag tycker att det blev sämre var när jag tog bort min helper klass. Den skapade jag för att undvika duplicering av kod och för att flytta ut större delar till en egen "modul", men detta ville inte phpmetrics att man skulle göra. Scrutinizer kan dock ge en ganska snabb överblick om hur bra ett projekt är med sina badges. Dock kan coverage vara lite missvisande och man kan exkludera filer för att "fuska" till sig ett bättre betyg.</p>
     <h2 id="7">Kmom07</h2>
 
 {% endblock %}

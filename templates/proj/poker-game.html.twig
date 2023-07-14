@@ -1,0 +1,50 @@
+{% extends "proj/project-nav.html.twig" %}
+
+{% block title %}5 Card poker{% endblock %}
+
+{% block body %}
+    {% if runda == 4 %}
+        {% if playerRule.won(pcRule) %}
+            <h1>Du vann</h1>
+        {% else %}
+            <h1>Du Förlorade</h1>
+        {% endif %}
+    {% endif %}
+
+
+    <h1>Datorn</h1>
+    
+    <div class="pc">
+        {% for c in pc %}
+        <div class="card-with-checkbox">
+            <img class="blackjackcard" src="{{ asset(c.getVisual()) }}">
+        </div>
+        {% endfor %}
+    <p>{{pcRule.getRule()}}</p>
+    </div>
+
+    <div>
+    <h1>Du</h1>
+
+    <form action="{{ path('round-handler') }}" method="POST" class="player-five-card">
+        {% for c in player %}
+        <div class="card-with-checkbox">
+            <img class="blackjackcard" src="{{ asset(c.getVisual()) }}">
+            <input class="checkbox" name="cards[]" type="checkbox" value="{{ c.getString() }}">
+        </div>
+        {% endfor %}
+        {% if runda < 4%}
+        <input type="submit" value="Byt ut kort">
+        {% endif %}
+    <p>{{playerRule.getRule()}}</p>
+    </div>
+
+    </form>
+
+    {% if runda < 4%}
+        <h1>Runda: {{runda}}</h1>
+    {% else %}
+    <a class="button" href='reset'>Kör igen</a>
+    {% endif %}
+
+{% endblock %}
