@@ -24,7 +24,7 @@ class ProjectFiveHandRulesTest extends TestCase
         return $hand;
     }
 
-    public function testPair()
+    public function testPair(): void
     {
 
         $hand = $this->createHand([
@@ -38,7 +38,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("pair", $rule->getRule());
     }
 
-    public function testTwoPair()
+    public function testTwoPair(): void
     {
 
         $hand = $this->createHand([
@@ -52,7 +52,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("two_pair", $rule->getRule());
     }
 
-    public function testThreeOfAKind()
+    public function testThreeOfAKind(): void
     {
 
         $hand = $this->createHand([
@@ -66,7 +66,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("three_of_a_kind", $rule->getRule());
     }
 
-    public function testFourOfAKind()
+    public function testFourOfAKind(): void
     {
 
         $hand = $this->createHand([
@@ -80,7 +80,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("four_of_a_kind", $rule->getRule());
     }
 
-    public function testStraight()
+    public function testStraight(): void
     {
 
         $hand = $this->createHand([
@@ -94,7 +94,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("straight", $rule->getRule());
     }
 
-    public function testMiddleStraight()
+    public function testMiddleStraight(): void
     {
 
         $hand = $this->createHand([
@@ -108,7 +108,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("straight", $rule->getRule());
     }
 
-    public function testHighStraight()
+    public function testHighStraight(): void
     {
 
         $hand = $this->createHand([
@@ -122,7 +122,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("straight", $rule->getRule());
     }
 
-    public function testFlush()
+    public function testFlush(): void
     {
 
         $hand = $this->createHand([
@@ -136,7 +136,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("flush", $rule->getRule());
     }
 
-    public function testStraightFlush()
+    public function testStraightFlush(): void
     {
 
         $hand = $this->createHand([
@@ -150,7 +150,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("straight_flush", $rule->getRule());
     }
 
-    public function testMiddleFlush()
+    public function testMiddleFlush(): void
     {
 
         $hand = $this->createHand([
@@ -164,7 +164,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("straight_flush", $rule->getRule());
     }
 
-    public function testRoyalFlush()
+    public function testRoyalFlush(): void
     {
 
         $hand = $this->createHand([
@@ -178,7 +178,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("royal_flush", $rule->getRule());
     }
 
-    public function testFullHouse()
+    public function testFullHouse(): void
     {
 
         $hand = $this->createHand([
@@ -192,7 +192,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals("full_house", $rule->getRule());
     }
 
-    public function testNoPointsHighCard()
+    public function testNoPointsHighCard(): void
     {
         $hand = $this->createHand([
             [11, "diamonds"],
@@ -206,7 +206,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals($rule->getHighCard()[0], $card->showAll());
     }
 
-    public function testPairHighCard()
+    public function testPairHighCard(): void
     {
         $hand = $this->createHand([
             [11, "diamonds"],
@@ -223,7 +223,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals($rule->getHighCard(), $returnHand->getCards());
     }
 
-    public function testThreeOfAKindHighCard()
+    public function testThreeOfAKindHighCard(): void
     {
         $hand = $this->createHand([
             [8, "diamonds"],
@@ -241,7 +241,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals($rule->getHighCard(), $returnHand->getCards());
     }
 
-    public function testFourOfAKindHighCard()
+    public function testFourOfAKindHighCard(): void
     {
         $hand = $this->createHand([
             [8, "diamonds"],
@@ -260,7 +260,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals($rule->getHighCard(), $returnHand->getCards());
     }
 
-    public function testFourOfAKindHighCardLowCardLast()
+    public function testFourOfAKindHighCardLowCardLast(): void
     {
         $hand = $this->createHand([
             [8, "diamonds"],
@@ -279,7 +279,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals($rule->getHighCard(), $returnHand->getCards());
     }
 
-    public function testStraightHighCard()
+    public function testStraightHighCard(): void
     {
         $hand = $this->createHand([
             [2, "diamonds"],
@@ -299,7 +299,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertEquals($rule->getHighCard(), $returnHand->getCards());
     }
 
-    public function testWinnerPairs()
+    public function testWinnerPairs(): void
     {
         $hand2 = $this->createHand([
             [4, "hearts"],
@@ -323,7 +323,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertFalse($rule2->won($rule1));
     }
 
-    public function testWinnerDifferentRules()
+    public function testWinnerDifferentRules(): void
     {
         $hand1 = $this->createHand([
             [4, "hearts"],
@@ -348,7 +348,7 @@ class ProjectFiveHandRulesTest extends TestCase
         $this->assertTrue($rule2->won($rule1));
     }
 
-    public function testWinnerSameRuleDifferentValues()
+    public function testWinnerSameRuleDifferentValues(): void
     {
         $hand1 = $this->createHand([
             [4, "hearts"],

@@ -15,7 +15,6 @@ use App\Project\VisualCard;
 
 class FiveCardPoker extends AbstractController
 {
-
     private function getDeck(SessionInterface $session): ProjectDeck
     {
         if ($session->has("deck")) {
@@ -23,7 +22,7 @@ class FiveCardPoker extends AbstractController
             return $deck;
         }
 
-        $deck = new ProjectDeck;
+        $deck = new ProjectDeck();
         $deck->setupDeck();
         $deck->shuffleDeck();
         return $deck;
@@ -36,7 +35,7 @@ class FiveCardPoker extends AbstractController
         }
 
         $deck = $this->getDeck($session);
-        $hand = new ProjectHand;
+        $hand = new ProjectHand();
         $count = 0;
         while ($count < 5) {
             $hand->addToHand($deck->drawCard());
@@ -87,7 +86,7 @@ class FiveCardPoker extends AbstractController
         return $this->render('proj/poker-game.html.twig', $data);
     }
 
-    //Skapa get post route där jag tar bort kortet från handen 
+    //Skapa get post route där jag tar bort kortet från handen
 
     #[Route("/proj/reset", name: "reset-deck")]
     public function resetDeck(SessionInterface $session): Response

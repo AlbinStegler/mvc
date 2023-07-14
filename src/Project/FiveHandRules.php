@@ -297,7 +297,7 @@ class FiveHandRules
             return true;
         }
 
-        //Om det är samma värden på korten kollas villkor här 
+        //Om det är samma värden på korten kollas villkor här
         if ($this->setSameValueHighCard($cards)) {
             return true;
         };
@@ -335,7 +335,8 @@ class FiveHandRules
             "royal_flush" => 9
         ];
 
-        return $alternatives[$this->getRule()];;
+        return $alternatives[$this->getRule()];
+        ;
     }
 
     /**
@@ -350,7 +351,7 @@ class FiveHandRules
         if ($otherRule->getRule() == $this->rule) {
             //Om ena har ett högre värde vinner den spelaren
             if ($otherRule->highCard[0]->getValue() > $this->highCard[0]->getValue()) {
-                return False;
+                return false;
             }
             //Om de har samma kort jämförs valören på korten
             if ($otherRule->highCard[0]->getValue() == $this->highCard[0]->getValue()) {
@@ -359,7 +360,7 @@ class FiveHandRules
                 }
             }
 
-            return True;
+            return true;
         }
 
         $points = $this->getRulePoints();
@@ -368,6 +369,6 @@ class FiveHandRules
         if ($pointsComparison > $points) {
             return false;
         }
-        return True;
+        return true;
     }
 }
