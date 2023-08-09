@@ -1,0 +1,34 @@
+{% extends "proj/project-nav.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block main %}
+    <h1>Json</h1>
+    <form method="post" action="">
+    <p>
+        <h2>Visa spelarens hand</h2>
+        <input type="submit" name="playerhand" value="Spelares hand"
+            onClick="this.form.action='{{ path('proj-show-playerhand') }}';"
+        >
+    </p>
+    <p>
+        <h2>Visa datorns hand</h2>
+        <input type="submit" name="pchand" value="Visa Pc hand"
+            onClick="this.form.action='{{ path('proj-show-pchand') }}';"
+        >
+        <h2>Visa kortlek</h2>
+    <input type="submit" name="draw-mul" value="Visa kort kvar i kortlek"
+        onClick="this.form.action='{{ path('proj-show-deck')}}';"
+    >
+    <h2>Blanda Kortlek</h2>
+    <input type="submit" name="draw-mul" value="Visa blandad Kortlek"
+        onClick="this.form.action='{{ path('proj-show-deck-shuffled') }}';"
+    >
+    <h2>Visa spelarens nuvarande regel</h2>
+    <input type="submit" name="Regler" value="Visa Regler"
+        onClick="this.form.action='{{ path('proj-show-rule') }}';"
+    >
+    </p>
+</form>
+
+{% endblock %}
