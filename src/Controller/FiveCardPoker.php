@@ -41,6 +41,8 @@ class FiveCardPoker extends AbstractController
             $hand->addToHand($deck->drawCard());
             $count++;
         }
+        //Uppdaterar värdet efter draget kort
+        $session->set("deck", $deck);
         return $hand;
     }
 
@@ -59,12 +61,12 @@ class FiveCardPoker extends AbstractController
         }
         $runda = $session->get("round");
 
-        //Hämta kortlek
-        $deck = $this->getDeck($session);
 
         $player = $this->getHand($session, "playerHand");
         $pc = $this->getHand($session, "pc");
 
+        //Hämta kortlek
+        $deck = $this->getDeck($session);
         //Om spelet är slut
 
         $playerRules = new FiveHandRules($player);
@@ -110,7 +112,6 @@ class FiveCardPoker extends AbstractController
         if ($cards) {
             foreach ($cards as $card) {
                 $c = new VisualCard($card);
-                dump($c);
                 $playerHand->removeFromHand($c);
                 $playerHand->addToHand($deck->drawCard());
             }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1691574492">
-  <project timestamp="1691574492">
+<coverage generated="1691575947">
+  <project timestamp="1691575947">
     <file name="/home/albin/dbwebb-kurser/mvc/me/report/src/Card/BlackjackHand.php">
       <class name="App\Card\BlackjackHand" namespace="global">
         <metrics complexity="19" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="28" elements="35" coveredelements="35"/>
@@ -517,13 +517,13 @@
       <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
       <line num="20" type="stmt" count="7"/>
       <line num="21" type="stmt" count="7"/>
-      <line num="24" type="method" name="setupDeck" visibility="public" complexity="3" crap="3" count="4"/>
-      <line num="26" type="stmt" count="4"/>
-      <line num="28" type="stmt" count="4"/>
-      <line num="29" type="stmt" count="4"/>
-      <line num="30" type="stmt" count="4"/>
-      <line num="31" type="stmt" count="4"/>
-      <line num="34" type="stmt" count="4"/>
+      <line num="24" type="method" name="setupDeck" visibility="public" complexity="3" crap="3" count="5"/>
+      <line num="26" type="stmt" count="5"/>
+      <line num="28" type="stmt" count="5"/>
+      <line num="29" type="stmt" count="5"/>
+      <line num="30" type="stmt" count="5"/>
+      <line num="31" type="stmt" count="5"/>
+      <line num="34" type="stmt" count="5"/>
       <line num="39" type="method" name="recreateDeck" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="42" type="stmt" count="1"/>
       <line num="43" type="stmt" count="1"/>
@@ -536,16 +536,16 @@
       <line num="56" type="stmt" count="1"/>
       <line num="57" type="stmt" count="1"/>
       <line num="59" type="stmt" count="1"/>
-      <line num="62" type="method" name="addCard" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="64" type="stmt" count="4"/>
+      <line num="62" type="method" name="addCard" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="64" type="stmt" count="5"/>
       <line num="67" type="method" name="shuffleDeck" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="69" type="stmt" count="2"/>
-      <line num="72" type="method" name="drawCard" visibility="public" complexity="2" crap="2" count="2"/>
-      <line num="74" type="stmt" count="2"/>
+      <line num="72" type="method" name="drawCard" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="74" type="stmt" count="1"/>
       <line num="75" type="stmt" count="1"/>
       <line num="76" type="stmt" count="1"/>
       <line num="77" type="stmt" count="1"/>
-      <line num="79" type="stmt" count="2"/>
+      <line num="79" type="stmt" count="1"/>
       <line num="82" type="method" name="getDeckSize" visibility="public" complexity="1" crap="1" count="3"/>
       <line num="84" type="stmt" count="3"/>
       <line num="90" type="method" name="getAsArray" visibility="public" complexity="3" crap="3" count="3"/>
@@ -622,8 +622,8 @@
       <line num="38" type="method" name="setStyle" visibility="private" complexity="3" crap="3" count="36"/>
       <line num="40" type="stmt" count="36"/>
       <line num="41" type="stmt" count="36"/>
-      <line num="42" type="stmt" count="16"/>
-      <line num="43" type="stmt" count="16"/>
+      <line num="42" type="stmt" count="17"/>
+      <line num="43" type="stmt" count="17"/>
       <line num="45" type="stmt" count="36"/>
       <line num="46" type="stmt" count="35"/>
       <line num="52" type="method" name="getVisual" visibility="public" complexity="1" crap="1" count="17"/>
