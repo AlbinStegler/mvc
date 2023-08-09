@@ -1006,6 +1006,41 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Project-VisualCard.html#property_imgPath"
         },                {
+            "fqsen": "\\App\\Controller\\ProjectApi",
+            "name": "ProjectApi",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApi.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApi\u003A\u003AprojectApiStart\u0028\u0029",
+            "name": "projectApiStart",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApi.html#method_projectApiStart"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApi\u003A\u003AshowPlayerHand\u0028\u0029",
+            "name": "showPlayerHand",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApi.html#method_showPlayerHand"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApi\u003A\u003AshowPcHand\u0028\u0029",
+            "name": "showPcHand",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApi.html#method_showPcHand"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApi\u003A\u003AshowDeck\u0028\u0029",
+            "name": "showDeck",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApi.html#method_showDeck"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApi\u003A\u003AshowShuffledDeck\u0028\u0029",
+            "name": "showShuffledDeck",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApi.html#method_showShuffledDeck"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApi\u003A\u003AshowCurrentRules\u0028\u0029",
+            "name": "showCurrentRules",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApi.html#method_showCurrentRules"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
