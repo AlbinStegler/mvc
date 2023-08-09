@@ -9,6 +9,18 @@ use PHPUnit\Framework\TestCase;
  */
 class VisualCardTest extends TestCase
 {
+    public function testStringConstruct(): void
+    {
+        $card = new VisualCard("1_of_spades");
+        $this->assertInstanceOf("\App\Project\VisualCard", $card);
+        $this->assertEquals($card->getValue(), 1);
+        $this->assertEquals($card->getType(), "spades");
+
+        $card = new VisualCard("king_of_spades");
+        $this->assertInstanceOf("\App\Project\VisualCard", $card);
+        $this->assertEquals($card->getValue(), 13);
+        $this->assertEquals($card->getType(), "spades");
+    }
     public function testCreateCardGraphic(): void
     {
         $card = new VisualCard(2, "Hearts");
@@ -28,5 +40,11 @@ class VisualCardTest extends TestCase
         $this->assertArrayHasKey("value", $val);
         $this->assertArrayHasKey("type", $val);
         $this->assertArrayHasKey("style", $val);
+    }
+
+    public function testGetAsString(): void
+    {
+        $card = new VisualCard(4, "Diamonds");
+        $this->assertEquals($card->getString(), "4_of_Diamonds");
     }
 }

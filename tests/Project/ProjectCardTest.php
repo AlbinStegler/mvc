@@ -9,6 +9,18 @@ use PHPUnit\Framework\TestCase;
  */
 class ProjectCardTest extends TestCase
 {
+    public function testStringConstruct(): void
+    {
+        $card = new ProjectCard("1_of_spades");
+        $this->assertInstanceOf("\App\Project\ProjectCard", $card);
+        $this->assertEquals($card->getValue(), 1);
+        $this->assertEquals($card->getType(), "spades");
+
+        $card = new ProjectCard("king_of_spades");
+        $this->assertInstanceOf("\App\Project\ProjectCard", $card);
+        $this->assertEquals($card->getValue(), 13);
+        $this->assertEquals($card->getType(), "spades");
+    }
     public function testCreateCard(): void
     {
         $card = new ProjectCard(1, "Spades");

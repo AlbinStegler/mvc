@@ -2,6 +2,7 @@
 
 namespace App\Project;
 
+use App\Card\CardGraphic;
 use PHPUnit\Framework\TestCase;
 
 class ProjectDeckTest extends TestCase
