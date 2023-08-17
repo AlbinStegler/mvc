@@ -155,12 +155,15 @@ class FiveCardPoker extends AbstractController
 
         //Betting
         if ($runda == 1) {
-            if ($request->get("bet"));
-            $session->set("bet", (int)$request->get("bet"));
+            $bet = (int)$request->get("bet");
+            $money = (int)$session->get("money");
+
+            $session->set("bet", $bet);
+            $session->set("money", $money - $bet);
         }
 
 
-        if ($runda == 3) {
+        if ($runda >= 3) {
             $money = $session->get("money");
             $bet = $session->get("bet");
 
@@ -170,11 +173,11 @@ class FiveCardPoker extends AbstractController
 
 
             if ($player->won($pc)) {
-                $session->set("money", $money + $bet);
+                $session->set("money", $money + ($bet * 2));
             }
 
             if (!$player->won($pc)) {
-                $session->set("money", $money - $bet);
+                $session->set("money", $money);
             }
         }
 
