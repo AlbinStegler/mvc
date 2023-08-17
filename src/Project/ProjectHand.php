@@ -20,6 +20,7 @@ class ProjectHand
         $key = array_search($cardToRemove, $this->cards);
         if ($key !== false) {
             unset($this->cards[$key]);
+            $this->cards = array_values($this->cards);
             return true;
         }
         return false;

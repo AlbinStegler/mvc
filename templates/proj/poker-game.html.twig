@@ -38,7 +38,11 @@
         {% endif %}
     <p>{{playerRule.getRule()}}</p>
     </div>
-
+    <h1>Dina pengar: {{money}}</h1>
+    {% if runda == 1%}
+    <h1>Bet</h1>
+    <input type="number" name="bet" value="10" min="10" max="{{money}}" required>
+    {% endif %}
     </form>
 
     {% if runda < 4%}

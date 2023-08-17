@@ -46,6 +46,19 @@
     <p>Jag tycker att gränssnittet är snyggt och enkelt att använda. Det finns tydliga grafer samt bilder som visar kopplingar mellan klasser och det är enkelt att använda. Jag tycker att det bästa var funktionen med att se kopplingar mellan klasser.</p>
     <p>Att integrera Scrutinizer var lite krångligt för mig då min sass modul inte var korrekt installerad vilket resulterade i en build som "faila". Verktyget är bra att ha då testerna sker automatiskt vid push och det är inget man måste tänka på för att hålla det uppdaterat. Jag föredrog php metrics UI då man tydligt kunde se vad som var fel, men jag gillade badgesen i Scrutinizer. Jag fick 27% coverage i starten av bygget då jag inte har tester på controller klasserna och där har jag majoriteten av min kod.</p>
     <p>Kodkvalite enligt mig är en läsbar kod. Vissa saker med testerna kan skapa en renare kod, men ett exempel där jag tycker att det blev sämre var när jag tog bort min helper klass. Den skapade jag för att undvika duplicering av kod och för att flytta ut större delar till en egen "modul", men detta ville inte phpmetrics att man skulle göra. Scrutinizer kan dock ge en ganska snabb överblick om hur bra ett projekt är med sina badges. Dock kan coverage vara lite missvisande och man kan exkludera filer för att "fuska" till sig ett bättre betyg.</p>
-    <h2 id="7">Kmom07</h2>
-
+    <h2 id="7">Kmom07/10</h2>
+    <h3>Krav 1-3</h3>
+    <p>För Kmom7/10 gjordes valet att göra ett Femkortspokerspel. </p>
+    <p>För att skapa spelet gjorde jag ett val att skapa en ny klass för kortleken för mitt projekt, detta var inte något jag var tvungen att göra men eftersom att jag inte var helt nöjd med sättet jag tidigare hade baserat denna klass gjorde jag en ny som baserades på att lagra de kort som fanns kvar i den i session.</p>
+    <p>Sessionen håller koll på spelarens pengar, vilken runda det är samt vilka kort som finns kvar i kortleken.</p>
+    <p>Jag valde att göra datorn enkel och så att den väljer korten slumpmässigt.</p>
+    <p>För spelet skapades en länk i navbaren för att ta sig vidare till spelet där det är en ny stil där man endast ser länkar som tillhör projektet.</p>
+    <p>Projektet bestod i stor del av logiskt kodande för att avgöra vad för regler som spelarna har och vilka regler som vinner över andra. Detta löstes genom klassen FiveHandRules där man ger klassen en hand som sedan sätter vilken regel denna handen har. För att sedan avgöra vinnare mellan händerna kan man jämföra två likadana objekt av denna typ för att få tillbaka vilken som vann.</p>
+    <h3>Krav 4</h3>
+    <p>För att få API:et att fungera gjorde jag ett postformulär som visades upp på en sida med JSON PRETTY PRINT. Dessa visar spelarens nuvarande hand som finns i session, datorns nuvarande hand. Vilka kort som finns i kortleken. En blandar kortleken och sista visar vilka regler de olika spelarna har med nuvarande hand.</p>
+    <h3>Hur projektet gick att genoföra</h3>
+    <p>Det som var det svåraste med projektet var att koda den logiska delen i regelklassen. Eftersom att det är många regler i Femkortspoker var det ganska många logiska operationer som behövde göras. Efter det var det svårt att lösa delen där man avgör om exempelvis båda spelarna har par ska den med högst par vinna. Jag valde att spelet endas ska använda sig av en kortlek då båda spelarna inte kan exakt samma kort vilket gjorde det lite enklare att koda.</p>
+    <p>Att genoföra projektet tog betydligt längre tid än vad jag hade förväntat mig och det enklaste var att implementera klasserna i controllerna då jag kunde testa de med unitests samtidigt som jag skapade dem. Det gjorde att jag visste att klasserna redan fungerade som de skulle när jag kom till sluttampen.</p>
+    <h3>Tankar ang kursen</h3>
+    <p>Jag tycker att kursen var bra men att slutprojektet eventuellt var en aningen för tidskrävande. Den info för att klara av kursen tycker jag fanns i antingen föreläsningar eller på dbwebb, jag betygsätter den 7/10</p>
 {% endblock %}

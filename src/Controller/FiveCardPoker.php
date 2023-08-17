@@ -46,6 +46,11 @@ class FiveCardPoker extends AbstractController
         return $hand;
     }
 
+    #[Route("/proj/about", name: "proj-about")]
+    public function projAbout(): Response
+    {
+        return $this->render('proj/project-about.html.twig');
+    }
 
     #[Route("/proj", name: "proj-start")]
     public function projLanding(): Response
@@ -56,6 +61,15 @@ class FiveCardPoker extends AbstractController
     #[Route("/proj/poker", name: "poker-game")]
     public function pokerGame(SessionInterface $session): Response
     {
+        //Pengar
+        if (!$session->has("money")) {
+            $session->set("money", 100);
+        }
+        $money = $session->get("money");
+        if ($money <= 0) {
+            $session->set("money", 100);
+        }
+
         if (!$session->has("round")) {
             $session->set("round", 1);
         }
@@ -78,7 +92,8 @@ class FiveCardPoker extends AbstractController
             "player" => $player->getCards(), "pc" => $pc->getCards(),
             "deck" => $deck, "runda" => $runda,
             "playerRule" => $playerRules,
-            "pcRule" => $pcRules
+            "pcRule" => $pcRules,
+            "money" => $money
         ];
 
         $session->set("deck", $deck);
@@ -136,6 +151,33 @@ class FiveCardPoker extends AbstractController
 
         $runda = $session->get("round");
         $session->set("round", (int)$runda + 1);
+
+
+        //Betting
+        if ($runda == 1) {
+            if ($request->get("bet"));
+            $session->set("bet", (int)$request->get("bet"));
+        }
+
+
+        if ($runda == 3) {
+            $money = $session->get("money");
+            $bet = $session->get("bet");
+
+            $pc = new FiveHandRules($pc);
+            $playerHand = $session->get("playerHand");
+            $player = new FiveHandRules($playerHand);
+
+
+            if ($player->won($pc)) {
+                $session->set("money", $money + $bet);
+            }
+
+            if (!$player->won($pc)) {
+                $session->set("money", $money - $bet);
+            }
+        }
+
 
         return $this->redirectToRoute('poker-game');
     }

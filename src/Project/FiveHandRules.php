@@ -44,8 +44,12 @@ class FiveHandRules
             "royal_flush"
         ];
 
+
         //Check for same values if its a pair or three of a kind it cant be a flush or royalflush
         $this->rule = $this->checkSameValue();
+        if ($this->rule == "four_of_a_kind") {
+            return $this->rule;
+        }
         //TVÅ PAR
         if ($this->rule == "pair") {
             //Kolla för 2 par returnera om det är det
@@ -280,7 +284,7 @@ class FiveHandRules
 
         //Kollar lättaste möjligheterna först
         if ($this->rule == "no matching cards") {
-            $this->highCard = $this->hand->getHand();
+            $this->highCard = $this->hand->getCards();
             return true;
         }
 
@@ -335,8 +339,7 @@ class FiveHandRules
             "royal_flush" => 9
         ];
 
-        return $alternatives[$this->getRule()];
-        ;
+        return $alternatives[$this->getRule()];;
     }
 
     /**
@@ -350,6 +353,9 @@ class FiveHandRules
         //Jämför om båda har samma regler vinner den med högst kort
         if ($otherRule->getRule() == $this->rule) {
             //Om ena har ett högre värde vinner den spelaren
+
+            // dump($otherRule->highCard[0]);
+            // dump($this->highCard[0]);
             if ($otherRule->highCard[0]->getValue() > $this->highCard[0]->getValue()) {
                 return false;
             }
