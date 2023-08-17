@@ -20,26 +20,9 @@ use App\Project\VisualCard;
 class ProjectApi extends AbstractController
 {
     #[Route("/project/api", name: "proj-api")]
-    public function projectApiStart(SessionInterface $session): Response
+    public function projectApiStart(): Response
     {
         return $this->render('proj/projJson.html.twig');
-        // //Hämtar kort från session
-        // $bank = $this->getBankHand($session);
-        // $player = $this->getPlayerHand($session);
-        // $deck = $this->createDeckFromSession($session);
-        // $deck->shuffleDeck();
-
-        // dump($bank);
-        // dump($player);
-
-        // $data = ["bank" => $bank->getCards(), "spelare" => $player->getCards(), "deck" => $deck->showDeck()];
-
-        // $response = new JsonResponse($data);
-
-        // $response->setEncodingOptions(
-        //     $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        // );
-        // return $response;
     }
 
     #[Route("/project/api/showPlayerhand", name: "proj-show-playerhand", methods: ["POST"])]
@@ -80,6 +63,7 @@ class ProjectApi extends AbstractController
     {
         $hand = $session->get("deck");
         $hand->shuffleDeck();
+        $session->set("deck", $hand);
         $response = new JsonResponse($hand->getAsArray());
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT

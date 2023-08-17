@@ -203,7 +203,8 @@ class ProjectFiveHandRulesTest extends TestCase
         ]);
         $card = new VisualCard(12, "hearts");
         $rule = new FiveHandRules($hand);
-        $this->assertEquals($rule->getHighCard()[0], $card->showAll());
+
+        $this->assertEquals($rule->getHighCard()[0], $card);
     }
 
     public function testPairHighCard(): void
