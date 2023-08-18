@@ -701,6 +701,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-FiveCardPoker.html#method_getHand"
         },                {
+            "fqsen": "\\App\\Controller\\FiveCardPoker\u003A\u003AprojAbout\u0028\u0029",
+            "name": "projAbout",
+            "summary": "",
+            "url": "classes/App-Controller-FiveCardPoker.html#method_projAbout"
+        },                {
             "fqsen": "\\App\\Controller\\FiveCardPoker\u003A\u003AprojLanding\u0028\u0029",
             "name": "projLanding",
             "summary": "",
